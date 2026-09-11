@@ -306,7 +306,11 @@ def download_and_normalize(
                 out_path.write_text("", encoding="utf-8")
                 continue
 
+            # 住所と座標を欠いたまま公開すると地図に出ない行が黙って増えるので、
+            # 施設ファイルを取れなかった場合も、取れたのに結合できなかった場合も
+            # degraded として記録に残す
             joined = None
+            degraded_reason = None
             if dataset.facility_url:
                 try:
                     facility_data = _fetch(dataset.facility_url, throttle)
@@ -317,19 +321,15 @@ def download_and_normalize(
                     logger.info(f"  facility fetch failed: {dataset.id} ({e})")
                     facility_records = None
                 if facility_records is None:
-                    # 住所と座標を欠いたまま公開すると地図に出ない行が黙って増えるので、
-                    # 施設ファイルを取れなかったことを必ず記録に残す
-                    log_source(
-                        dataset,
-                        status="degraded",
-                        reason="facility_unavailable",
-                        encoding=encoding,
-                        row_count=len(records),
-                    )
+                    degraded_reason = "facility_unavailable"
                 else:
                     joined = _merge_facility(records, facility_records)
                     # 結合で埋まった列を必須列の判定に含める
                     mapped = sorted({key for r in records for key in r if not key.startswith("_")})
+                    if records and joined == 0:
+                        degraded_reason = "facility_join_empty"
+                    elif joined < len(records):
+                        degraded_reason = f"facility_join_partial: {joined}/{len(records)}"
 
             # 種別の必須列を取れないファイルは様式が変わったとみなして隔離する
             missing = [c for c in dataset.required_columns if c not in mapped]
@@ -351,9 +351,17 @@ def download_and_normalize(
                     record["_fetched_at"] = fetched_at
                     writer.write(json.dumps(record, ensure_ascii=False) + "\n")
 
-            fields = {"status": "ok", "encoding": encoding, "row_count": len(records)}
+            fields = {
+                "status": "degraded" if degraded_reason else "ok",
+                "encoding": encoding,
+                "row_count": len(records),
+            }
+            if degraded_reason:
+                fields["reason"] = degraded_reason
             if joined is not None:
                 fields["facility_joined"] = joined
             log_source(dataset, **fields)
             suffix = f", {joined} joined" if joined is not None else ""
+            if degraded_reason:
+                suffix += f" (degraded: {degraded_reason})"
             logger.info(f"  {dataset.id}: {len(records)} rows{suffix}")
