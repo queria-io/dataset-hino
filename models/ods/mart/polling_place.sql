@@ -1,4 +1,4 @@
--- 投票所一覧（期日前投票所を含む、自治体標準ODS、区市町村横断）
+-- 投票所一覧（期日前投票所を含む、自治体標準ODS、日野市）
 select
     municipality_code,
     organization_name,

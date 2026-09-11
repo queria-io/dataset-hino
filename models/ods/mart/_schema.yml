@@ -11,6 +11,9 @@ models:
   columns:
   - name: municipality_code
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: name
   - name: name_kana
   - name: name_alias
@@ -52,6 +55,9 @@ models:
   columns:
   - name: municipality_code
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: name
   - name: name_kana
   - name: name_alias
@@ -103,6 +109,9 @@ models:
   columns:
   - name: municipality_code
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: name
   - name: name_kana
   - name: address
@@ -201,6 +210,9 @@ models:
   columns:
   - name: municipality_code
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: name
   - name: name_kana
   - name: facility_type
@@ -242,6 +254,9 @@ models:
   columns:
   - name: municipality_code
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: name
   - name: name_kana
   - name: address
@@ -274,6 +289,9 @@ models:
   columns:
   - name: municipality_code
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: name
   - name: name_kana
   - name: address
@@ -310,6 +328,9 @@ models:
   columns:
   - name: municipality_code
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: name
   - name: name_kana
   - name: name_en
@@ -418,6 +439,9 @@ models:
   columns:
   - name: municipality_code
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: name
   - name: name_kana
   - name: address
@@ -457,6 +481,9 @@ models:
   columns:
   - name: municipality_code
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: facility_type
   - name: organization_name
   - name: address
@@ -516,6 +543,9 @@ models:
   columns:
   - name: municipality_code
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: equipment_id
   - name: radio_id
   - name: name
@@ -593,6 +623,9 @@ models:
   columns:
   - name: municipality_code
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: organization_name
   - name: name
   - name: name_kana
@@ -642,6 +675,9 @@ models:
   - name: municipality_code
   - name: organization_name
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: polling_place_id
   - name: voting_district_number
   - name: name
@@ -708,6 +744,9 @@ models:
   columns:
   - name: municipality_code
   - name: facility_id
+    data_tests:
+    - not_null
+    - unique
   - name: collection_place_id
   - name: name
   - name: name_kana
