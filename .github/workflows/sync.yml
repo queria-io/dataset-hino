@@ -1,0 +1,23 @@
+name: Sync
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "*.md"
+  schedule:
+    # 毎週月曜 05:00 JST。上流は不定期更新。読むのは 24 本の CSV だけで
+    # 1 回あたり数分なので、空振りしても Actions の枠を圧迫しない
+    - cron: "0 20 * * 0"
+  workflow_dispatch:
+
+concurrency:
+  group: sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    uses: queria-io/dataset-shared/.github/workflows/sync.yml@main
+    with:
+      dataset_name: hino
+    secrets: inherit
