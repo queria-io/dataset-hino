@@ -1,0 +1,28 @@
+-- 公衆無線LANアクセスポイント一覧（自治体標準ODS、日野市）
+select
+    municipality_code,
+    facility_id,
+    name,
+    name_kana,
+    address,
+    prefecture,
+    city,
+    postal_code,
+    phone_number,
+    lat,
+    lon,
+    geo_lat,
+    geo_lon,
+    geo_source,
+    geo_level,
+    {{ ods_geometry() }} as geometry,
+    installer,
+    ssid,
+    coverage_area,
+    url,
+    notes,
+    extras,
+    as_of,
+    source_url,
+    source_page
+from {{ ref('stg_public_wireless_lan') }}

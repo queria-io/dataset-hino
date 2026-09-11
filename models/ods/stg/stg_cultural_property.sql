@@ -1,0 +1,48 @@
+{# 文化財のステージング。緯度経度・員数を数値化する。
+   文化財指定日は自治体により日付不明部分を 99 で埋める表記（例 1982-04-99）があり、
+   DATE に落とすと情報が欠けるため原典の文字列のまま保持する。 #}
+
+with source as (
+    select * from {{ ref('raw_cultural_property') }}
+)
+select
+    municipality_code,
+    facility_id,
+    name,
+    name_kana,
+    name_alias,
+    name_en,
+    property_class,
+    property_type,
+    place_name,
+    address,
+    prefecture,
+    city,
+    building_name,
+    postal_code,
+    phone_number,
+    try_cast(lat as double) as lat,
+    try_cast(lon as double) as lon,
+    {{ ods_geo_columns() }},
+    try_cast(quantity as integer) as quantity,
+    quantity_unit,
+    corporate_number,
+    owner,
+    designated_date,
+    available_days,
+    start_time,
+    end_time,
+    available_notes,
+    image,
+    image_license,
+    summary,
+    summary_en,
+    description,
+    description_en,
+    url,
+    notes,
+    _extras as extras,
+    _as_of as as_of,
+    _source_url as source_url,
+    _source_page as source_page
+from source

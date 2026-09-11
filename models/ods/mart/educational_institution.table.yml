@@ -1,0 +1,95 @@
+schema: ods
+name: educational_institution
+title: 教育機関
+description: 日野市が公開する「教育機関一覧」（自治体標準オープンデータセット）。幼稚園・小学校・中学校等の学校種、設置区分、所在地、緯度経度、連絡先を持つ。所在地は連結表記の列を持たず市区町村/町字/番地以下に分かれる。学校種は統制コードと日本語ラベルが混在しうるため生値のまま保持する。データ時点は
+  2024-03-28（日野市が公開ページに掲げている値）。
+keywords:
+- 日野市
+- 東京都
+- 教育
+- 学校
+- 自治体標準オープンデータセット
+- GIS
+published: true
+sources:
+- path: https://www.city.hino.lg.jp/opendata/about/1026816/1026913.html
+fields:
+- name: school_code
+  title: 学校コード
+- name: school_type
+  title: 学校種
+  description: 幼稚園・小学校・中学校等の種別。統制コード（A1・B1 等）と日本語ラベルが混在
+- name: prefecture_code
+  title: 都道府県番号
+- name: establishment_category
+  title: 設置区分
+  description: 国立・公立・私立等の区分
+- name: establisher
+  title: 設置者情報
+- name: branch_type
+  title: 本分校
+  description: 本校・分校の区別
+- name: main_school_code
+  title: 本校学校コード
+- name: main_school_name
+  title: 本校学校名
+- name: name
+  title: 名称
+  description: 学校・教育機関の名称
+- name: name_kana
+  title: 名称カナ
+- name: name_alias
+  title: 略称
+- name: city
+  title: 市区町村
+  description: 所在地の市区町村
+- name: town
+  title: 町字
+  description: 所在地の町字
+- name: street_number
+  title: 番地以下
+  description: 所在地の番地以下
+- name: postal_code
+  title: 郵便番号
+- name: lat
+  title: 緯度
+- name: lon
+  title: 経度
+- name: geo_lat
+  title: 緯度（地図表示用）
+  description: Queria が付与。原典の緯度経度が使えればその値、緯度と経度が入れ替わっていれば入れ替えた値。採用できなければ NULL。由来は geo_source を見る
+- name: geo_lon
+  title: 経度（地図表示用）
+  description: Queria が付与。geo_lat と対になる経度
+- name: geo_source
+  title: 座標の由来
+  description: source=原典の緯度経度をそのまま採用、source_swapped=原典で緯度と経度が入れ替わっていたので入れ替えて採用、NULL=採用できる座標が無い
+- name: geo_level
+  title: 座標の粒度
+  description: 原典由来のため source 固定
+- name: geometry
+  title: ジオメトリ
+  description: Queria が付与。geo_lat / geo_lon から作った POINT。座標が無い行は NULL
+- name: contact_name
+  title: 連絡先名称
+- name: phone_number
+  title: 電話番号
+- name: attribute_set_date
+  title: 属性情報設定年月日
+- name: attribute_abolished_date
+  title: 属性情報廃止年月日
+- name: old_survey_number
+  title: 旧学校調査番号
+- name: new_school_code
+  title: 移行後の学校コード
+- name: extras
+  title: 追加列
+  description: 標準列にマッピングできなかった元データの列（JSON）
+- name: as_of
+  title: データ時点
+  description: 日野市が公開ページに掲げている値。取得日ではない
+- name: source_url
+  title: 取得元URL
+- name: source_page
+  title: 公開ページ
+  description: 日野市サイト上の、このデータの公開ページ

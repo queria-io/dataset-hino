@@ -1,0 +1,109 @@
+schema: ods
+name: bicycle_parking
+title: 公営駐輪場
+description: 日野市が公開する「公営駐輪場一覧」（自治体標準オープンデータセット）。駐輪場ごとの名称・位置・収容台数・屋内外区分を持つ。本体ファイルは住所と座標を持たず、併走する施設情報ファイル（132128_facility.csv）側にあるため、施設_ID
+  で結合して補っている。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
+keywords:
+- 日野市
+- 東京都
+- 駐輪場
+- 交通
+- 自治体標準オープンデータセット
+- GIS
+published: true
+sources:
+- path: https://www.city.hino.lg.jp/opendata/about/1026816/1026914.html
+fields:
+- name: municipality_code
+  title: 全国地方公共団体コード
+- name: facility_id
+  title: ID
+- name: organization_name
+  title: 地方公共団体名
+- name: name
+  title: 名称
+  description: 駐輪場の名称
+- name: name_kana
+  title: 名称カナ
+- name: name_en
+  title: 名称英字
+- name: name_alias
+  title: 名称通称
+- name: poi_code
+  title: POIコード
+- name: address
+  title: 所在地
+  description: 分割形式の自治体では空になり緯度経度のみを持つ場合がある
+- name: prefecture
+  title: 都道府県
+- name: city
+  title: 市区町村
+- name: building_name
+  title: 建物名等（方書）
+- name: postal_code
+  title: 郵便番号
+- name: phone_number
+  title: 電話番号
+- name: lat
+  title: 緯度
+- name: lon
+  title: 経度
+- name: geo_lat
+  title: 緯度（地図表示用）
+  description: Queria が付与。原典の緯度経度が使えればその値、緯度と経度が入れ替わっていれば入れ替えた値。採用できなければ NULL。由来は geo_source を見る
+- name: geo_lon
+  title: 経度（地図表示用）
+  description: Queria が付与。geo_lat と対になる経度
+- name: geo_source
+  title: 座標の由来
+  description: source=原典の緯度経度をそのまま採用、source_swapped=原典で緯度と経度が入れ替わっていたので入れ替えて採用、NULL=採用できる座標が無い
+- name: geo_level
+  title: 座標の粒度
+  description: 原典由来のため source 固定
+- name: geometry
+  title: ジオメトリ
+  description: Queria が付与。geo_lat / geo_lon から作った POINT。座標が無い行は NULL
+- name: indoor_outdoor
+  title: 屋内外
+  description: 「屋内」「屋外」等の区分（元データの表記のまま）
+- name: capacity
+  title: 最大駐輪台数
+  description: 自転車の収容台数
+- name: nearest_station
+  title: 最寄駅
+- name: available_days
+  title: 利用可能曜日
+- name: start_time
+  title: 開始時間
+- name: end_time
+  title: 終了時間
+- name: available_notes
+  title: 利用可能日時特記事項
+- name: fee_type
+  title: 料金種別
+- name: fee
+  title: 料金
+- name: fee_details
+  title: 料金備考
+- name: payment_type
+  title: 決済種別
+- name: opened_date
+  title: 開設日
+- name: description
+  title: 説明
+  description: 構造・利用区分・種別ごとの収容台数などの補足（自治体により内容が異なる）
+- name: url
+  title: URL
+- name: notes
+  title: 備考
+- name: extras
+  title: 追加列
+  description: 標準列にマッピングできなかった元データの列（JSON）
+- name: as_of
+  title: データ時点
+  description: 日野市が公開ページに掲げている値。取得日ではない
+- name: source_url
+  title: 取得元URL
+- name: source_page
+  title: 公開ページ
+  description: 日野市サイト上の、このデータの公開ページ

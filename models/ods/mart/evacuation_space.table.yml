@@ -1,0 +1,99 @@
+schema: ods
+name: evacuation_space
+title: 緊急避難場所
+description: 日野市が公開する「緊急避難場所一覧」（自治体標準オープンデータセット）。災害対策基本法に基づき市長が指定する、切迫した災害の危険から逃れるための緊急避難場所。災害種別ごとの対応可否を BOOLEAN
+  で持つ。全国網羅の類似データとして gsi.emergency_evacuation_site（国土地理院）がある。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
+keywords:
+- 日野市
+- 東京都
+- 防災
+- 避難場所
+- 自治体標準オープンデータセット
+- GIS
+published: true
+sources:
+- path: https://www.city.hino.lg.jp/opendata/about/1026816/1026809.html
+fields:
+- name: municipality_code
+  title: 全国地方公共団体コード
+  description: 6桁の全国地方公共団体コード（元データの表記のまま。5桁の場合もある）
+- name: facility_id
+  title: ID
+  description: 日野市が採番した施設ID。定義書Bの施設情報ファイルとの結合キーでもある。実データでは全行に入っており、テーブル内で一意（2026-09-11 時点の実測）
+- name: name
+  title: 名称
+- name: name_kana
+  title: 名称カナ
+- name: address
+  title: 所在地
+  description: 所在地の連結表記（旧形式の「住所」列を含む）
+- name: prefecture
+  title: 都道府県
+- name: city
+  title: 市区町村
+- name: postal_code
+  title: 郵便番号
+- name: phone_number
+  title: 電話番号
+- name: lat
+  title: 緯度
+- name: lon
+  title: 経度
+- name: geo_lat
+  title: 緯度（地図表示用）
+  description: Queria が付与。原典の緯度経度が使えればその値、緯度と経度が入れ替わっていれば入れ替えた値。採用できなければ NULL。由来は geo_source を見る
+- name: geo_lon
+  title: 経度（地図表示用）
+  description: Queria が付与。geo_lat と対になる経度
+- name: geo_source
+  title: 座標の由来
+  description: source=原典の緯度経度をそのまま採用、source_swapped=原典で緯度と経度が入れ替わっていたので入れ替えて採用、NULL=採用できる座標が無い
+- name: geo_level
+  title: 座標の粒度
+  description: 原典由来のため source 固定
+- name: geometry
+  title: ジオメトリ
+  description: Queria が付与。geo_lat / geo_lon から作った POINT。座標が無い行は NULL
+- name: elevation
+  title: 標高
+  description: メートル
+- name: for_flood
+  title: 災害種別_洪水
+  description: 対応=true、非対応=false、不明=NULL（以下の災害種別も同じ）
+- name: for_landslide
+  title: 災害種別_崖崩れ土石流地滑り
+- name: for_storm_surge
+  title: 災害種別_高潮
+- name: for_earthquake
+  title: 災害種別_地震
+- name: for_tsunami
+  title: 災害種別_津波
+- name: for_large_fire
+  title: 災害種別_大規模な火事
+- name: for_inland_flooding
+  title: 災害種別_内水氾濫
+- name: for_volcano
+  title: 災害種別_火山現象
+- name: shelter_overlap
+  title: 指定避難所との重複
+- name: capacity_note
+  title: 想定収容人数
+  description: 元データの表記のまま（「810人（2平方メートルあたり1人）」等の自由記述）
+- name: target_area
+  title: 対象地区
+  description: 対象となる町会・自治会等（; 区切り）
+- name: url
+  title: URL
+- name: notes
+  title: 備考
+- name: extras
+  title: 追加列
+  description: 標準列にマッピングできなかった元データの列（JSON）
+- name: as_of
+  title: データ時点
+  description: 日野市が公開ページに掲げている値。取得日ではない
+- name: source_url
+  title: 取得元URL
+- name: source_page
+  title: 公開ページ
+  description: 日野市サイト上の、このデータの公開ページ

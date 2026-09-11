@@ -1,0 +1,98 @@
+schema: ods
+name: polling_place
+title: 投票所
+description: 日野市が公開する「投票所一覧」（自治体標準オープンデータセット）。選挙の投票所を投票区名とともに収録する。期日前投票所は投票所区分（polling_place_type）で区別する。本体ファイルは住所と座標を持たず、併走する施設情報ファイル（132128_facility.csv）側にあるため、施設_ID
+  で結合して補っている。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
+keywords:
+- 日野市
+- 東京都
+- 選挙
+- 投票所
+- 自治体標準オープンデータセット
+- GIS
+published: true
+sources:
+- path: https://www.city.hino.lg.jp/opendata/about/1026816/1026916.html
+fields:
+- name: municipality_code
+  title: 全国地方公共団体コード
+- name: organization_name
+  title: 地方公共団体名
+- name: facility_id
+  title: 施設ID
+- name: polling_place_id
+  title: 投票所ID
+- name: voting_district_number
+  title: 投票区番号
+- name: name
+  title: 名称
+  description: 投票所（期日前投票所）の名称
+- name: name_kana
+  title: 名称カナ
+- name: name_en
+  title: 名称英字
+- name: description
+  title: 説明
+- name: address
+  title: 所在地
+- name: prefecture
+  title: 都道府県
+- name: city
+  title: 市区町村
+- name: ward
+  title: 行政区
+- name: town
+  title: 町字
+- name: town_id
+  title: 町字ID
+- name: street_number
+  title: 番地以下
+- name: building_name
+  title: 建物名等（方書）
+- name: postal_code
+  title: 郵便番号
+- name: phone_number
+  title: 電話番号
+- name: lat
+  title: 緯度
+- name: lon
+  title: 経度
+- name: geo_lat
+  title: 緯度（地図表示用）
+  description: Queria が付与。原典の緯度経度が使えればその値、緯度と経度が入れ替わっていれば入れ替えた値。採用できなければ NULL。由来は geo_source を見る
+- name: geo_lon
+  title: 経度（地図表示用）
+  description: Queria が付与。geo_lat と対になる経度
+- name: geo_source
+  title: 座標の由来
+  description: source=原典の緯度経度をそのまま採用、source_swapped=原典で緯度と経度が入れ替わっていたので入れ替えて採用、NULL=採用できる座標が無い
+- name: geo_level
+  title: 座標の粒度
+  description: 原典由来のため source 固定
+- name: geometry
+  title: ジオメトリ
+  description: Queria が付与。geo_lat / geo_lon から作った POINT。座標が無い行は NULL
+- name: crs
+  title: 座標参照系
+- name: crs_code
+  title: 座標参照系コード
+- name: polling_place_type
+  title: 投票所区分
+  description: 「投票所」「期日前投票所」等の区分
+- name: voting_district
+  title: 投票区名
+- name: election_type
+  title: 選挙区分
+- name: notes
+  title: 備考
+- name: extras
+  title: 追加列
+  description: 標準列にマッピングできなかった元データの列（JSON）
+- name: as_of
+  title: データ時点
+  description: 日野市が公開ページに掲げている値。取得日ではない
+- name: source_url
+  title: 取得元URL
+- name: source_page
+  title: 公開ページ
+  description: 日野市サイト上の、このデータの公開ページ

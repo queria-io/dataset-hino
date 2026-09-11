@@ -1,0 +1,39 @@
+version: 2
+
+models:
+- name: stg_public_facility
+  description: 公共施設のステージング。緯度経度を数値化し、地図表示用の座標を決める。
+- name: stg_cultural_property
+  description: 文化財のステージング。緯度経度を数値化し、地図表示用の座標を決める。
+- name: stg_evacuation_space
+  description: 緊急避難場所のステージング。緯度経度を数値化し、地図表示用の座標を決める。
+- name: stg_population
+  description: 地域・年齢別人口のステージング。型変換のみで、地図表示用の座標は持たない。
+- name: stg_preschool
+  description: 子育て施設のステージング。緯度経度を数値化し、地図表示用の座標を決める。
+- name: stg_public_wireless_lan
+  description: 公衆無線LANのステージング。緯度経度を数値化し、地図表示用の座標を決める。
+- name: stg_aed
+  description: AED設置箇所のステージング。緯度経度を数値化し、地図表示用の座標を決める。
+- name: stg_care_service
+  description: 介護サービス事業所のステージング。緯度経度を数値化し、地図表示用の座標を決める。
+- name: stg_event
+  description: イベントのステージング。緯度経度を数値化し、地図表示用の座標を決める。
+- name: stg_public_toilet
+  description: 公衆トイレのステージング。緯度経度を数値化し、地図表示用の座標を決める。
+- name: stg_fire_hydrant
+  description: 消防水利施設のステージング。緯度経度を数値化し、地図表示用の座標を決める。
+- name: stg_school_district
+  description: 小中学校通学区域のステージング。型変換のみで、地図表示用の座標は持たない。
+- name: stg_emergency_radio
+  description: 防災行政無線のステージング。緯度経度を数値化し、地図表示用の座標を決める。住所と座標は併走する施設情報ファイル由来。
+- name: stg_educational_institution
+  description: 教育機関のステージング。緯度経度を数値化し、地図表示用の座標を決める。
+- name: stg_bicycle_parking
+  description: 公営駐輪場のステージング。緯度経度を数値化し、地図表示用の座標を決める。住所と座標は併走する施設情報ファイル由来。
+- name: stg_polling_place
+  description: 投票所のステージング。緯度経度を数値化し、地図表示用の座標を決める。住所と座標は併走する施設情報ファイル由来。
+- name: stg_garbage_separation
+  description: ゴミの分別方法のステージング。型変換のみで、地図表示用の座標は持たない。
+- name: stg_garbage_collection_place
+  description: ゴミ集積所のステージング。緯度経度を数値化し、地図表示用の座標を決める。住所と座標は併走する施設情報ファイル由来。

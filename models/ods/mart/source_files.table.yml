@@ -1,0 +1,43 @@
+schema: ods
+name: source_files
+title: ODS取り込み結果
+description: 自治体標準ODS取り込みの実行結果（1行=1種別）。どのファイルを取り込んだか・データ時点・行数・スキップや失敗の理由を記録する。テーブルの中身が少ないときに、原典がそうなのか取り込みで落ちたのかを切り分けるために使う。
+keywords:
+- 日野市
+- 東京都
+- 自治体標準オープンデータセット
+- ODS
+published: true
+sources:
+- path: https://www.city.hino.lg.jp/opendata/
+fields:
+- name: dataset_id
+  title: 種別ID
+  description: ODS のデータセット種別（aed 等）
+- name: dataset_title
+  title: 種別名
+  description: 日野市の公開ページ上の名称
+- name: as_of
+  title: データ時点
+  description: 日野市が公開ページに掲げている値
+- name: status
+  title: 取得結果
+  description: ok / failed（取得エラー）/ skipped（ヘッダー不一致等）/ degraded（施設情報ファイルを取れず住所と座標を補えなかった）
+- name: reason
+  title: 理由
+  description: failed / skipped / degraded の理由
+- name: encoding
+  title: 文字コード
+  description: 判定に使ったエンコーディング
+- name: row_count
+  title: 行数
+  description: 正規化後の行数
+- name: facility_joined
+  title: 施設結合行数
+  description: 併走する施設情報ファイルと施設_ID で結合できた行数。結合しない種別は NULL
+- name: url
+  title: 取得元URL
+- name: page
+  title: 公開ページ
+- name: fetched_at
+  title: 取得日時

@@ -1,0 +1,85 @@
+schema: ods
+name: emergency_radio
+title: 防災行政無線
+description: 日野市が公開する「防災行政無線設置一覧」（自治体標準オープンデータセット）。防災行政無線の屋外拡声子局の設置場所を持つ。1行=1設置箇所。本体ファイルは住所と座標を持たず、併走する施設情報ファイル（132128_facility.csv）側にあるため、施設_ID
+  で結合して補っている。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
+keywords:
+- 日野市
+- 東京都
+- 防災
+- 防災行政無線
+- 自治体標準オープンデータセット
+- GIS
+published: true
+sources:
+- path: https://www.city.hino.lg.jp/opendata/about/1026816/1026912.html
+fields:
+- name: municipality_code
+  title: 全国地方公共団体コード
+- name: facility_id
+  title: 施設ID
+  description: 併走する施設情報ファイルとの結合キー
+- name: equipment_id
+  title: 設備ID
+- name: radio_id
+  title: 防災行政無線ID
+- name: name
+  title: 名称
+  description: 設置されている施設の名称
+- name: name_kana
+  title: 名称カナ
+- name: name_en
+  title: 名称英字
+- name: address
+  title: 所在地
+  description: 施設情報ファイル側の住所_連結表記
+- name: prefecture
+  title: 都道府県
+- name: city
+  title: 市区町村
+- name: town
+  title: 町字
+- name: street_number
+  title: 番地以下
+- name: building_name
+  title: 建物名等
+- name: postal_code
+  title: 郵便番号
+- name: phone_number
+  title: 電話番号
+- name: lat
+  title: 緯度
+- name: lon
+  title: 経度
+- name: geo_lat
+  title: 緯度（地図表示用）
+  description: Queria が付与。原典の緯度経度が使えればその値、緯度と経度が入れ替わっていれば入れ替えた値。採用できなければ NULL。由来は geo_source を見る
+- name: geo_lon
+  title: 経度（地図表示用）
+  description: Queria が付与。geo_lat と対になる経度
+- name: geo_source
+  title: 座標の由来
+  description: source=原典の緯度経度をそのまま採用、source_swapped=原典で緯度と経度が入れ替わっていたので入れ替えて採用、NULL=採用できる座標が無い
+- name: geo_level
+  title: 座標の粒度
+  description: 原典由来のため source 固定
+- name: geometry
+  title: ジオメトリ
+  description: Queria が付与。geo_lat / geo_lon から作った POINT。座標が無い行は NULL
+- name: district
+  title: 地区名
+- name: description
+  title: 説明
+- name: notes
+  title: 備考
+- name: extras
+  title: 追加列
+  description: 標準列にマッピングできなかった元データの列（JSON）
+- name: as_of
+  title: データ時点
+  description: 日野市が公開ページに掲げている値。取得日ではない
+- name: source_url
+  title: 取得元URL
+- name: source_page
+  title: 公開ページ
+  description: 日野市サイト上の、このデータの公開ページ
