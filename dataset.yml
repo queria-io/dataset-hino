@@ -1,0 +1,36 @@
+spec_version: "0.1"
+name: hino
+title: 日野市オープンデータ
+description: 東京都日野市が公開している自治体標準オープンデータセット18種別。公共施設・AED・緊急避難場所・介護サービス事業所・子育て施設・文化財・公衆トイレ・投票所・ゴミの分別方法などを、デジタル庁のデータセット定義書の様式のまま収録する
+keywords:
+  - オープンデータ
+  - 日野市
+  - 東京都
+  - 多摩地域
+  - 自治体標準オープンデータセット
+  - 公共施設
+  - 防災
+  - GIS
+homepage: https://github.com/queria-io/dataset-hino
+language: ja
+
+licenses:
+  - CC-BY-4.0
+
+sources:
+  - title: 日野市オープンデータ
+    path: https://www.city.hino.lg.jp/opendata/
+
+contributors:
+  - title: 日野市
+    path: https://www.city.hino.lg.jp/
+    roles: [rightsHolder]
+
+temporal_coverage: { start: "2022-04-01", end: "2024-03-28" }
+spatial_coverage: [JP]
+update_frequency: irregular
+cover: 🏞️
+
+schemas:
+  - name: ods
+    title: 自治体標準オープンデータセット
