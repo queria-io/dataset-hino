@@ -1,0 +1,1775 @@
+# 日野市が公開する自治体標準オープンデータセットの取り込み定義。
+#
+# 日野市のオープンデータカタログは CKAN ではなく自前 CGI で、機械可読な一覧の
+# 出口が無い。そのため種別の判定はせず、公開ページと CSV の URL を直接持つ。
+# URL が変わったらここを直す。
+#
+# columns[].source は照合するヘッダー名を優先順に並べたもので、先にマッチした
+# 列を採用する。日野市は定義書 A/B の様式で公開しているが、旧推奨データセット
+# 形式のヘッダーも残してあるのは、上流が様式を差し替えても拾えるようにするため。
+# どの標準キーにもマッチしないヘッダーの値は _extras に退避する。
+#
+# facility_url を持つ種別は、定義書 B の施設・設備分離型で公開されていて
+# 本体ファイルが住所と座標を持たない。併走する 132128_facility.csv を
+# 施設_ID で結合して補う（結合は本体側が空の列だけを埋め、既存値は上書きしない）。
+#
+# as_of は日野市がページに掲げている「データ時点」。ファイルの取得日ではない。
+
+facility_columns:
+- key: facility_id
+  source:
+  - 施設_ID
+- key: facility_name
+  source:
+  - 施設_名称
+- key: poi_code
+  source:
+  - 施設_POIコード
+- key: address
+  source:
+  - 住所_連結表記
+- key: prefecture
+  source:
+  - 住所_都道府県
+- key: city
+  source:
+  - 住所_市区町村
+- key: town
+  source:
+  - 住所_町字
+- key: town_id
+  source:
+  - 住所_町字ID
+- key: street_number
+  source:
+  - 住所_番地以下
+- key: building_name
+  source:
+  - 住所_建物名等(方書)
+- key: postal_code
+  source:
+  - 連絡先_郵便番号
+- key: phone_number
+  source:
+  - 連絡先_電話番号
+- key: facility_lat
+  source:
+  - 住所_緯度
+- key: facility_lon
+  source:
+  - 住所_経度
+- key: available_days
+  source:
+  - 施設_サービス曜日
+- key: start_time
+  source:
+  - 施設_開始時刻
+- key: end_time
+  source:
+  - 施設_終了時刻
+- key: available_notes
+  source:
+  - 施設_日時備考
+- key: url
+  source:
+  - 施設_URL
+datasets:
+- id: public_facility
+  title: 公共施設一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026807.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/807/132128_public_facility.csv
+  as_of: '2024-03-28'
+  columns:
+  - key: municipality_code
+    source:
+    - 全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: facility_id
+    source:
+    - ID
+    - 'NO'
+  - key: name
+    source:
+    - 名称
+  - key: name_kana
+    source:
+    - 名称_カナ
+  - key: name_alias
+    source:
+    - 名称_通称
+  - key: poi_code
+    source:
+    - POIコード
+  - key: address
+    source:
+    - 所在地_連結表記
+    - 住所
+  - key: prefecture
+    source:
+    - 所在地_都道府県
+    - 都道府県名
+  - key: city
+    source:
+    - 所在地_市区町村
+    - 市区町村名
+  - key: postal_code
+    source:
+    - 郵便番号
+  - key: phone_number
+    source:
+    - 電話番号
+  - key: lat
+    source:
+    - 緯度
+  - key: lon
+    source:
+    - 経度
+  - key: corporate_number
+    source:
+    - 法人番号
+  - key: corporate_name
+    source:
+    - 団体名
+  - key: available_days
+    source:
+    - 利用可能曜日
+  - key: start_time
+    source:
+    - 開始時間
+  - key: end_time
+    source:
+    - 終了時間
+  - key: available_notes
+    source:
+    - 利用可能時間特記事項
+    - 利用可能日時特記事項
+  - key: access
+    source:
+    - アクセス方法
+  - key: parking
+    source:
+    - 駐車場情報
+  - key: description
+    source:
+    - 説明
+  - key: url
+    source:
+    - URL
+  - key: notes
+    source:
+    - 備考
+- id: cultural_property
+  title: 文化財一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026808.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/808/132128_cultural_property.csv
+  as_of: '2024-03-28'
+  columns:
+  - key: municipality_code
+    source:
+    - 全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: facility_id
+    source:
+    - ID
+    - 'NO'
+  - key: name
+    source:
+    - 名称
+  - key: name_kana
+    source:
+    - 名称_カナ
+    - カナ名称
+  - key: name_alias
+    source:
+    - 名称_通称
+  - key: name_en
+    source:
+    - 名称_英語
+  - key: property_class
+    source:
+    - 文化財分類
+  - key: property_type
+    source:
+    - 種類
+  - key: place_name
+    source:
+    - 場所名称
+  - key: address
+    source:
+    - 所在地_連結表記
+    - 住所
+  - key: prefecture
+    source:
+    - 所在地_都道府県
+    - 都道府県名
+  - key: city
+    source:
+    - 所在地_市区町村
+    - 市区町村名
+  - key: building_name
+    source:
+    - 建物名等(方書)
+    - 方書
+  - key: postal_code
+    source:
+    - 郵便番号
+  - key: phone_number
+    source:
+    - 電話番号
+  - key: lat
+    source:
+    - 緯度
+  - key: lon
+    source:
+    - 経度
+  - key: quantity
+    source:
+    - 員数（数）
+  - key: quantity_unit
+    source:
+    - 員数（単位）
+  - key: corporate_number
+    source:
+    - 法人番号
+  - key: owner
+    source:
+    - 所有者等
+  - key: designated_date
+    source:
+    - 文化財指定日
+  - key: available_days
+    source:
+    - 利用可能曜日
+  - key: start_time
+    source:
+    - 開始時間
+  - key: end_time
+    source:
+    - 終了時間
+  - key: available_notes
+    source:
+    - 利用可能日時特記事項
+  - key: image
+    source:
+    - 画像
+  - key: image_license
+    source:
+    - 画像_ライセンス
+  - key: summary
+    source:
+    - 概要
+  - key: summary_en
+    source:
+    - 概要_英語
+  - key: description
+    source:
+    - 説明
+  - key: description_en
+    source:
+    - 説明_英語
+  - key: url
+    source:
+    - URL
+  - key: notes
+    source:
+    - 備考
+- id: evacuation_space
+  title: 緊急避難場所一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026809.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/809/132128_evacuation_space.csv
+  as_of: '2024-03-28'
+  columns:
+  - key: municipality_code
+    source:
+    - 全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: facility_id
+    source:
+    - ID
+    - 'NO'
+  - key: name
+    source:
+    - 名称
+  - key: name_kana
+    source:
+    - 名称_カナ
+  - key: address
+    source:
+    - 所在地_連結表記
+    - 住所
+  - key: prefecture
+    source:
+    - 所在地_都道府県
+    - 都道府県名
+  - key: city
+    source:
+    - 所在地_市区町村
+    - 市区町村名
+  - key: postal_code
+    source:
+    - 郵便番号
+  - key: phone_number
+    source:
+    - 電話番号
+  - key: lat
+    source:
+    - 緯度
+  - key: lon
+    source:
+    - 経度
+  - key: elevation
+    source:
+    - 標高
+  - key: for_flood
+    source:
+    - 災害種別_洪水
+  - key: for_landslide
+    source:
+    - 災害種別_崖崩れ、土石流及び地滑り
+    - 災害種別_崖崩れ・土石流及び地滑り
+  - key: for_storm_surge
+    source:
+    - 災害種別_高潮
+  - key: for_earthquake
+    source:
+    - 災害種別_地震
+    - 災害種別_地震(火災)
+  - key: for_tsunami
+    source:
+    - 災害種別_津波
+  - key: for_large_fire
+    source:
+    - 災害種別_大規模な火事
+  - key: for_inland_flooding
+    source:
+    - 災害種別_内水氾濫
+  - key: for_volcano
+    source:
+    - 災害種別_火山現象
+  - key: shelter_overlap
+    source:
+    - 指定避難所との重複
+  - key: capacity_note
+    source:
+    - 想定収容人数
+  - key: target_area
+    source:
+    - 対象となる町会・自治会
+    - 対象となる地区
+  - key: url
+    source:
+    - URL
+  - key: notes
+    source:
+    - 備考
+- id: population
+  title: 地域・年齢別人口
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026902.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/902/132128_population.csv
+  as_of: '2022-04-01'
+  required_columns:
+  - survey_date
+  - area_name
+  - total_population
+  identity_column: total_population
+  columns:
+  - key: municipality_code
+    source:
+    - 全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: area_code
+    source:
+    - 地域コード
+  - key: organization_name
+    source:
+    - 地方公共団体名
+  - key: prefecture
+    source:
+    - 都道府県名
+  - key: city
+    source:
+    - 市区町村名
+  - key: survey_date
+    source:
+    - 調査年月日
+  - key: area_name
+    source:
+    - 地域名
+  - key: total_population
+    source:
+    - 総人口
+  - key: male
+    source:
+    - 男性
+  - key: female
+    source:
+    - 女性
+  - key: age_0_4_male
+    source:
+    - 0-4歳の男性
+  - key: age_0_4_female
+    source:
+    - 0-4歳の女性
+  - key: age_5_9_male
+    source:
+    - 5-9歳の男性
+  - key: age_5_9_female
+    source:
+    - 5-9歳の女性
+  - key: age_10_14_male
+    source:
+    - 10-14歳の男性
+  - key: age_10_14_female
+    source:
+    - 10-14歳の女性
+  - key: age_15_19_male
+    source:
+    - 15-19歳の男性
+  - key: age_15_19_female
+    source:
+    - 15-19歳の女性
+  - key: age_20_24_male
+    source:
+    - 20-24歳の男性
+  - key: age_20_24_female
+    source:
+    - 20-24歳の女性
+  - key: age_25_29_male
+    source:
+    - 25-29歳の男性
+  - key: age_25_29_female
+    source:
+    - 25-29歳の女性
+  - key: age_30_34_male
+    source:
+    - 30-34歳の男性
+  - key: age_30_34_female
+    source:
+    - 30-34歳の女性
+  - key: age_35_39_male
+    source:
+    - 35-39歳の男性
+  - key: age_35_39_female
+    source:
+    - 35-39歳の女性
+  - key: age_40_44_male
+    source:
+    - 40-44歳の男性
+  - key: age_40_44_female
+    source:
+    - 40-44歳の女性
+  - key: age_45_49_male
+    source:
+    - 45-49歳の男性
+  - key: age_45_49_female
+    source:
+    - 45-49歳の女性
+  - key: age_50_54_male
+    source:
+    - 50-54歳の男性
+  - key: age_50_54_female
+    source:
+    - 50-54歳の女性
+  - key: age_55_59_male
+    source:
+    - 55-59歳の男性
+  - key: age_55_59_female
+    source:
+    - 55-59歳の女性
+  - key: age_60_64_male
+    source:
+    - 60-64歳の男性
+  - key: age_60_64_female
+    source:
+    - 60-64歳の女性
+  - key: age_65_69_male
+    source:
+    - 65-69歳の男性
+  - key: age_65_69_female
+    source:
+    - 65-69歳の女性
+  - key: age_70_74_male
+    source:
+    - 70-74歳の男性
+  - key: age_70_74_female
+    source:
+    - 70-74歳の女性
+  - key: age_75_79_male
+    source:
+    - 75-79歳の男性
+  - key: age_75_79_female
+    source:
+    - 75-79歳の女性
+  - key: age_80_84_male
+    source:
+    - 80-84歳の男性
+  - key: age_80_84_female
+    source:
+    - 80-84歳の女性
+  - key: age_85over_male
+    source:
+    - 85歳以上の男性
+  - key: age_85over_female
+    source:
+    - 85歳以上の女性
+  - key: households
+    source:
+    - 世帯数
+  - key: notes
+    source:
+    - 備考
+- id: preschool
+  title: 子育て施設一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026903.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/903/132128_preschool.csv
+  as_of: '2024-03-28'
+  columns:
+  - key: municipality_code
+    source:
+    - 全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: facility_id
+    source:
+    - ID
+    - 'NO'
+  - key: name
+    source:
+    - 名称
+  - key: name_kana
+    source:
+    - 名称_カナ
+  - key: facility_type
+    source:
+    - 種別
+  - key: address
+    source:
+    - 所在地_連結表記
+    - 住所
+  - key: prefecture
+    source:
+    - 所在地_都道府県
+    - 都道府県名
+  - key: city
+    source:
+    - 所在地_市区町村
+    - 市区町村名
+  - key: postal_code
+    source:
+    - 郵便番号
+  - key: phone_number
+    source:
+    - 電話番号
+  - key: lat
+    source:
+    - 緯度
+  - key: lon
+    source:
+    - 経度
+  - key: access
+    source:
+    - アクセス方法
+  - key: parking
+    source:
+    - 駐車場情報
+  - key: corporate_name
+    source:
+    - 団体名
+  - key: capacity
+    source:
+    - 収容定員
+  - key: age_range
+    source:
+    - 受入年齢
+  - key: available_days
+    source:
+    - 利用可能曜日
+  - key: start_time
+    source:
+    - 開始時間
+  - key: end_time
+    source:
+    - 終了時間
+  - key: available_notes
+    source:
+    - 利用可能日時特記事項
+  - key: temporary_care
+    source:
+    - 一時預かりの有無
+  - key: sick_care
+    source:
+    - 病児保育の有無
+  - key: url
+    source:
+    - URL
+  - key: notes
+    source:
+    - 備考
+- id: public_wireless_lan
+  title: 公衆無線LANアクセスポイント一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026904.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/904/132128_public_wireless_lan.csv
+  as_of: '2024-03-28'
+  columns:
+  - key: municipality_code
+    source:
+    - 全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: facility_id
+    source:
+    - ID
+    - 'NO'
+  - key: name
+    source:
+    - 名称
+  - key: name_kana
+    source:
+    - 名称_カナ
+  - key: address
+    source:
+    - 所在地_連結表記
+    - 住所
+  - key: prefecture
+    source:
+    - 所在地_都道府県
+    - 都道府県名
+  - key: city
+    source:
+    - 所在地_市区町村
+    - 市区町村名
+  - key: postal_code
+    source:
+    - 郵便番号
+  - key: phone_number
+    source:
+    - 電話番号
+  - key: lat
+    source:
+    - 緯度
+  - key: lon
+    source:
+    - 経度
+  - key: installer
+    source:
+    - 設置者
+  - key: ssid
+    source:
+    - SSID
+  - key: coverage_area
+    source:
+    - 提供エリア
+  - key: url
+    source:
+    - URL
+  - key: notes
+    source:
+    - 備考
+- id: aed
+  title: AED設置箇所一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026905.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/905/132128_aed.csv
+  as_of: '2024-03-28'
+  columns:
+  - key: municipality_code
+    source:
+    - 全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: facility_id
+    source:
+    - ID
+    - 'NO'
+  - key: name
+    source:
+    - 名称
+  - key: name_kana
+    source:
+    - 名称_カナ
+  - key: address
+    source:
+    - 所在地_連結表記
+    - 住所
+  - key: prefecture
+    source:
+    - 所在地_都道府県
+    - 都道府県名
+  - key: city
+    source:
+    - 所在地_市区町村
+    - 市区町村名
+  - key: postal_code
+    source:
+    - 郵便番号
+  - key: phone_number
+    source:
+    - 電話番号
+  - key: lat
+    source:
+    - 緯度
+  - key: lon
+    source:
+    - 経度
+  - key: install_position
+    source:
+    - 設置位置
+  - key: available_days
+    source:
+    - 利用可能曜日
+  - key: start_time
+    source:
+    - 開始時間
+  - key: end_time
+    source:
+    - 終了時間
+  - key: available_notes
+    source:
+    - 利用可能日時特記事項
+  - key: for_children
+    source:
+    - 小児対応設備の有無
+  - key: url
+    source:
+    - URL
+  - key: notes
+    source:
+    - 備考
+- id: care_service
+  title: 介護サービス事業所一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026906.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/906/132128_care_service.csv
+  as_of: '2024-03-28'
+  columns:
+  - key: municipality_code
+    source:
+    - 全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: facility_id
+    source:
+    - ID
+    - 'NO'
+  - key: name
+    source:
+    - 介護サービス事業所名称
+    - 名称
+  - key: name_kana
+    source:
+    - 介護サービス事業所名称_カナ
+    - 名称_カナ
+  - key: name_en
+    source:
+    - 介護サービス事業所名称_英字
+    - 名称_英語
+  - key: service_type
+    source:
+    - 実施サービス
+  - key: location_municipality_code
+    source:
+    - 所在地_全国地方公共団体コード
+  - key: town_id
+    source:
+    - 町字ID
+  - key: address
+    source:
+    - 所在地_連結表記
+    - 住所
+  - key: prefecture
+    source:
+    - 所在地_都道府県
+    - 都道府県名
+  - key: city
+    source:
+    - 所在地_市区町村
+    - 市区町村名
+  - key: town
+    source:
+    - 所在地_町字
+  - key: street_number
+    source:
+    - 所在地_番地以下
+  - key: building_name
+    source:
+    - 建物名等(方書)
+    - 方書
+  - key: postal_code
+    source:
+    - 郵便番号
+  - key: phone_number
+    source:
+    - 電話番号
+  - key: fax_number
+    source:
+    - FAX番号
+  - key: lat
+    source:
+    - 緯度
+  - key: lon
+    source:
+    - 経度
+  - key: corporate_number
+    source:
+    - 法人番号
+  - key: corporate_name
+    source:
+    - 法人の名称
+    - 団体名
+  - key: business_number
+    source:
+    - 事業所番号
+  - key: available_days
+    source:
+    - 利用可能曜日
+  - key: available_notes
+    source:
+    - 利用可能曜日特記事項
+    - 利用可能日時特記事項
+  - key: capacity
+    source:
+    - 定員
+  - key: url
+    source:
+    - URL
+  - key: notes
+    source:
+    - 備考
+- id: event
+  title: イベント一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026907.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/907/132128_event.csv
+  as_of: '2024-03-28'
+  columns:
+  - key: municipality_code
+    source:
+    - 全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: corporate_number
+    source:
+    - 法人番号
+  - key: event_id
+    source:
+    - ID
+    - 'NO'
+  - key: organization_name
+    source:
+    - 地方公共団体名
+  - key: name
+    source:
+    - イベント名
+  - key: name_kana
+    source:
+    - イベント名_カナ
+  - key: name_en
+    source:
+    - イベント名_英語
+  - key: name_alias
+    source:
+    - イベント通称
+  - key: subtitle
+    source:
+    - サブタイトル
+  - key: content_url
+    source:
+    - コンテンツURL
+  - key: status
+    source:
+    - 状態
+  - key: keywords
+    source:
+    - キーワード
+  - key: tags
+    source:
+    - タグ
+  - key: schedule_pattern
+    source:
+    - 開催パターン
+  - key: start_date
+    source:
+    - 開始日
+  - key: end_date
+    source:
+    - 終了日
+  - key: start_time
+    source:
+    - 開始時間
+  - key: end_time
+    source:
+    - 終了時間
+  - key: schedule_notes
+    source:
+    - 開始日時特記事項
+  - key: summary
+    source:
+    - 概要
+  - key: description
+    source:
+    - 説明
+  - key: event_type
+    source:
+    - イベント種類
+  - key: fee
+    source:
+    - 料金(基本)
+  - key: fee_details
+    source:
+    - 料金(詳細)
+  - key: fee_type
+    source:
+    - 料金種別
+    - 料金_要否
+  - key: organizer
+    source:
+    - 主催者
+  - key: co_organizer
+    source:
+    - 共催団体
+    - 共催・協力団体
+  - key: target_audience
+    source:
+    - 対象者
+  - key: venue_name
+    source:
+    - 場所名称
+  - key: address
+    source:
+    - 所在地_連結表記
+    - 住所
+  - key: prefecture
+    source:
+    - 所在地_都道府県
+    - 都道府県名
+  - key: city
+    source:
+    - 所在地_市区町村
+    - 市区町村名
+  - key: building_name
+    source:
+    - 建物名等(方書)
+    - 方書
+  - key: lat
+    source:
+    - 緯度
+  - key: lon
+    source:
+    - 経度
+  - key: access
+    source:
+    - アクセス方法
+  - key: parking
+    source:
+    - 駐車場情報
+  - key: capacity
+    source:
+    - 定員
+  - key: application_deadline_date
+    source:
+    - 参加申込終了日
+  - key: application_deadline_time
+    source:
+    - 参加申込終了時間
+  - key: application_method
+    source:
+    - 参加申込方法
+  - key: contact_name
+    source:
+    - 連絡先名称
+  - key: contact_phone
+    source:
+    - 連絡先電話番号
+  - key: contact_extension
+    source:
+    - 連絡先内線番号
+  - key: image
+    source:
+    - 画像
+  - key: url
+    source:
+    - URL
+  - key: notes
+    source:
+    - 備考
+- id: public_toilet
+  title: 公衆トイレ一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026908.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/908/132128_public_toilet.csv
+  as_of: '2024-03-28'
+  columns:
+  - key: municipality_code
+    source:
+    - 全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: facility_id
+    source:
+    - ID
+    - 'NO'
+  - key: name
+    source:
+    - 名称
+  - key: name_kana
+    source:
+    - 名称_カナ
+  - key: address
+    source:
+    - 所在地_連結表記
+    - 住所
+  - key: prefecture
+    source:
+    - 所在地_都道府県
+    - 都道府県名
+  - key: city
+    source:
+    - 所在地_市区町村
+    - 市区町村名
+  - key: install_position
+    source:
+    - 設置位置
+  - key: lat
+    source:
+    - 緯度
+  - key: lon
+    source:
+    - 経度
+  - key: male_total
+    source:
+    - 男性トイレ総数
+  - key: female_total
+    source:
+    - 女性トイレ総数
+  - key: unisex_total
+    source:
+    - 男女共用トイレ総数
+  - key: barrier_free_total
+    source:
+    - バリアフリートイレ数
+  - key: wheelchair
+    source:
+    - 車椅子使用者用トイレ有無
+  - key: baby_facility
+    source:
+    - 乳幼児用設備設置トイレ有無
+  - key: ostomate
+    source:
+    - オストメイト設置トイレ有無
+  - key: start_time
+    source:
+    - 利用開始時間
+    - 開始時間
+  - key: end_time
+    source:
+    - 利用終了時間
+    - 終了時間
+  - key: available_notes
+    source:
+    - 利用可能時間特記事項
+  - key: image
+    source:
+    - 画像
+  - key: notes
+    source:
+    - 備考
+- id: fire_hydrant
+  title: 消防水利施設一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026910.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/910/132128_fire_hydrant.csv
+  as_of: '2024-03-28'
+  required_columns:
+  - facility_type
+  - address
+  identity_column: facility_type
+  columns:
+  - key: municipality_code
+    source:
+    - 全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: facility_id
+    source:
+    - ID
+    - 'NO'
+  - key: organization_name
+    source:
+    - 地方公共団体名
+  - key: facility_type
+    source:
+    - 種別
+  - key: location_municipality_code
+    source:
+    - 所在地_全国地方公共団体コード
+  - key: town_id
+    source:
+    - 町字ID
+  - key: address
+    source:
+    - 所在地_連結表記
+    - 住所
+  - key: prefecture
+    source:
+    - 所在地_都道府県
+    - 都道府県名
+  - key: city
+    source:
+    - 所在地_市区町村
+    - 市区町村名
+  - key: town
+    source:
+    - 所在地_町字
+  - key: street_number
+    source:
+    - 所在地_番地以下
+  - key: building_name
+    source:
+    - 建物名等(方書)
+    - 方書
+  - key: lat
+    source:
+    - 緯度
+  - key: lon
+    source:
+    - 経度
+  - key: diameter
+    source:
+    - 口径
+  - key: notes
+    source:
+    - 備考
+- id: school_district
+  title: 小中学校通学区域情報
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026911.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/911/132128_school_district.csv
+  as_of: '2024-03-28'
+  required_columns:
+  - name
+  - city
+  columns:
+  - key: municipality_code
+    source:
+    - 情報の管理主体_全国地方公共団体コード
+    - 全国地方公共団体コード
+  - key: school_id
+    source:
+    - 学校ID
+  - key: school_code
+    source:
+    - 学校コード
+  - key: prefecture
+    source:
+    - 学校所在地_都道府県名
+  - key: district
+    source:
+    - 学校所在地_郡名
+  - key: city
+    source:
+    - 学校所在地_市区町村名
+  - key: ward
+    source:
+    - 学校所在地_行政区名
+  - key: school_municipality_code
+    source:
+    - 学校所在地_全国地方公共団体コード
+  - key: name
+    source:
+    - 学校名称
+  - key: name_kana
+    source:
+    - 学校名称_カナ
+  - key: poi_code
+    source:
+    - 行政サービス拠点種別
+  - key: registered_date
+    source:
+    - 通学区域_登録年月日
+  - key: abolished_date
+    source:
+    - 通学区域_廃止日
+  - key: district_addresses
+    source:
+    - 通学区域の住所
+  - key: notes
+    source:
+    - 特記事項
+  - key: polygon_file
+    source:
+    - ポリゴン_ファイル名
+- id: emergency_radio
+  title: 防災行政無線設置一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026912.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/912/132128_emergency_radio.csv
+  as_of: '2024-03-28'
+  facility_url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/912/132128_facility.csv
+  required_columns:
+  - name
+  identity_column: name
+  columns:
+  - key: municipality_code
+    source:
+    - 防災行政無線_全国地方公共団体コード
+    - 全国地方公共団体コード
+  - key: facility_id
+    source:
+    - 施設_ID
+  - key: equipment_id
+    source:
+    - 設備_ID
+  - key: radio_id
+    source:
+    - 防災行政無線_ID
+  - key: name
+    source:
+    - 防災行政無線_名称
+    - 名称
+  - key: name_kana
+    source:
+    - 防災行政無線_名称（カナ）
+    - 名称_カナ
+  - key: name_en
+    source:
+    - 防災行政無線_名称（英字）
+    - 名称_英字
+  - key: description
+    source:
+    - 防災行政無線_説明
+    - 説明
+  - key: lat
+    source:
+    - 防災行政無線_緯度
+    - 緯度
+  - key: lon
+    source:
+    - 防災行政無線_経度
+    - 経度
+  - key: crs
+    source:
+    - 防災行政無線_座標参照系
+    - 座標参照系
+  - key: crs_code
+    source:
+    - 防災行政無線_座標参照系コード
+    - 座標参照系コード
+  - key: district
+    source:
+    - 防災行政無線_地区名
+    - 地区名
+  - key: notes
+    source:
+    - 防災行政無線_備考
+    - 備考
+- id: educational_institution
+  title: 教育機関一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026913.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/913/132128_educational_institution.csv
+  as_of: '2024-03-28'
+  required_columns:
+  - name
+  - city
+  columns:
+  - key: school_code
+    source:
+    - 教育機関_学校コード
+    - 学校コード
+  - key: school_type
+    source:
+    - 教育機関_学校種
+    - 学校種
+    - 分類
+  - key: prefecture_code
+    source:
+    - 教育機関_都道府県番号
+    - 都道府県番号
+  - key: establishment_category
+    source:
+    - 教育機関_設置区分
+    - 設置区分
+  - key: establisher
+    source:
+    - 教育機関_設置者情報
+    - 設置者情報
+  - key: branch_type
+    source:
+    - 教育機関_本分校
+    - 本分校
+  - key: main_school_code
+    source:
+    - 教育機関_本校学校コード
+    - 本校学校コード
+  - key: main_school_name
+    source:
+    - 教育機関_本校学校名
+    - 本校学校名
+  - key: name
+    source:
+    - 教育機関_学校名
+    - 学校名
+    - 施設名称
+  - key: name_kana
+    source:
+    - 教育機関_学校名カナ表記
+    - 学校名カナ表記
+  - key: name_alias
+    source:
+    - 教育機関_学校略称
+    - 学校略称
+  - key: city
+    source:
+    - 教育機関_学校所在地（市区町村）
+    - 教育機関_学校所在地_市区町村
+    - 区
+  - key: town
+    source:
+    - 教育機関_学校所在地（町字）
+    - 教育機関_学校所在地_町字
+    - 町名以降
+  - key: street_number
+    source:
+    - 教育機関_学校所在地（番地以下）
+    - 教育機関_学校所在地_番地以下
+  - key: postal_code
+    source:
+    - 教育機関_郵便番号
+    - 郵便番号
+  - key: lat
+    source:
+    - 教育機関_緯度
+    - 緯度
+  - key: lon
+    source:
+    - 教育機関_経度
+    - 経度
+  - key: contact_name
+    source:
+    - 教育機関_連絡先名称
+    - 連絡先名称
+  - key: phone_number
+    source:
+    - 教育機関_連絡先電話番号
+    - 連絡先電話番号
+    - 電話番号
+  - key: attribute_set_date
+    source:
+    - 教育機関_属性情報設定年月日
+    - 属性情報設定年月日
+  - key: attribute_abolished_date
+    source:
+    - 教育機関_属性情報廃止年月日
+    - 属性情報廃止年月日
+  - key: old_survey_number
+    source:
+    - 教育機関_旧学校調査番号
+    - 旧学校調査番号
+  - key: new_school_code
+    source:
+    - 教育機関_移行後の学校コード
+    - 移行後の学校コード
+- id: bicycle_parking
+  title: 公営駐輪場一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026914.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/914/132128_bicycle_parking.csv
+  as_of: '2024-03-28'
+  facility_url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/914/132128_facility.csv
+  required_columns:
+  - name
+  columns:
+  - key: municipality_code
+    source:
+    - 公営駐輪場_全国地方公共団体コード
+    - 全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: facility_id
+    source:
+    - 施設_ID
+    - 公営駐輪場_ID
+    - ID
+    - 'NO'
+  - key: organization_name
+    source:
+    - 地方公共団体名
+  - key: name
+    source:
+    - 公営駐輪場_名称
+    - 名称
+  - key: name_kana
+    source:
+    - 公営駐輪場_名称（カナ）
+    - 名称_カナ
+    - 名称（カナ）
+  - key: name_en
+    source:
+    - 公営駐輪場_名称（英字）
+    - 名称_英字
+    - 名称（英字）
+  - key: name_alias
+    source:
+    - 名称_通称
+    - 施設通称
+  - key: poi_code
+    source:
+    - POIコード
+  - key: address
+    source:
+    - 所在地_連結表記
+    - 住所
+    - 所在地
+    - 位置
+  - key: prefecture
+    source:
+    - 所在地_都道府県
+    - 都道府県名
+  - key: city
+    source:
+    - 所在地_市区町村
+    - 市区町村名
+  - key: building_name
+    source:
+    - 建物名等(方書)
+    - 建物名等_方書
+    - 方書
+  - key: postal_code
+    source:
+    - 郵便番号
+  - key: phone_number
+    source:
+    - 連絡先電話番号
+    - 電話番号
+  - key: lat
+    source:
+    - 公営駐輪場_緯度
+    - 緯度
+  - key: lon
+    source:
+    - 公営駐輪場_経度
+    - 経度
+  - key: indoor_outdoor
+    source:
+    - 公営駐輪場_屋内外
+    - 屋内外
+  - key: capacity
+    source:
+    - 公営駐輪場_最大駐輪台数
+    - 最大駐輪台数
+    - 収容台数_自転車
+    - 台数（台）
+    - 収容台数
+    - 台数
+  - key: nearest_station
+    source:
+    - 最寄駅
+  - key: available_days
+    source:
+    - サービス曜日
+    - 利用可能曜日
+  - key: start_time
+    source:
+    - 開始時刻
+    - 開始時間
+  - key: end_time
+    source:
+    - 終了時刻
+    - 終了時間
+  - key: available_notes
+    source:
+    - 日時備考
+    - 利用可能時間特記事項
+    - 利用可能日時特記事項
+  - key: fee_type
+    source:
+    - 料金種別
+  - key: fee
+    source:
+    - 料金
+    - 料金(基本)
+  - key: fee_details
+    source:
+    - 料金備考
+    - 料金(詳細)
+  - key: payment_type
+    source:
+    - 決済種別
+  - key: opened_date
+    source:
+    - 開設日
+  - key: description
+    source:
+    - 公営駐輪場_説明
+    - 説明
+    - 概要
+  - key: url
+    source:
+    - URL
+  - key: notes
+    source:
+    - 備考
+- id: polling_place
+  title: 投票所一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026916.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/916/132128_polling_place.csv
+  as_of: '2024-03-28'
+  facility_url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/916/132128_facility.csv
+  required_columns:
+  - name
+  - voting_district
+  columns:
+  - key: municipality_code
+    source:
+    - 投票所_全国地方公共団体コード
+    - 全国地方公共団体コード
+  - key: organization_name
+    source:
+    - 地方公共団体名
+  - key: facility_id
+    source:
+    - 施設_ID
+  - key: polling_place_id
+    source:
+    - 投票所_ID
+    - ID
+  - key: voting_district_number
+    source:
+    - 投票区番号
+  - key: name
+    source:
+    - 投票所_名称
+    - 名称
+    - 場所名
+  - key: name_kana
+    source:
+    - 投票所_名称（カナ）
+    - 名称（カナ）
+    - 名称_カナ
+    - 名称かな
+  - key: name_en
+    source:
+    - 投票所_名称（英字）
+    - 名称（英字）
+    - 名称_英字
+    - 場所名(英語)
+  - key: description
+    source:
+    - 投票所_説明
+    - 説明
+    - 説明(日本語)
+  - key: address
+    source:
+    - 連結表記
+    - 所在地_連結表記
+    - 住所
+    - 所在地
+  - key: prefecture
+    source:
+    - 都道府県
+    - 都道府県名
+  - key: city
+    source:
+    - 市区町村
+    - 市区町村名
+  - key: ward
+    source:
+    - 行政区名
+  - key: town
+    source:
+    - 町字
+  - key: town_id
+    source:
+    - 町字ID
+  - key: street_number
+    source:
+    - 番地以下
+  - key: building_name
+    source:
+    - 建物名等_方書
+    - 建物名等(方書)
+    - 方書
+  - key: postal_code
+    source:
+    - 郵便番号
+  - key: phone_number
+    source:
+    - 連絡先電話番号
+    - 電話番号
+  - key: lat
+    source:
+    - 投票所_緯度
+    - 緯度
+  - key: lon
+    source:
+    - 投票所_経度
+    - 経度
+  - key: crs
+    source:
+    - 投票所_座標参照系
+    - 座標参照系
+  - key: crs_code
+    source:
+    - 投票所_座標参照系コード
+    - 座標参照系コード
+  - key: polling_place_type
+    source:
+    - 投票所_投票所区分
+    - 投票所区分
+  - key: voting_district
+    source:
+    - 投票所_投票区名
+    - 投票区名
+  - key: election_type
+    source:
+    - 選挙区分
+  - key: notes
+    source:
+    - 備考
+- id: garbage_separation
+  title: ゴミの分別方法一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026917.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/917/132128_hinoshi_garbage_separate.csv
+  as_of: '2024-03-28'
+  required_columns:
+  - item_name
+  - separation_category
+  identity_column: item_name
+  columns:
+  - key: municipality_code
+    source:
+    - 全国地方公共団体コード
+    - ゴミの分別方法_全国地方公共団体コード
+    - ごみの分別方法_全国地方公共団体コード
+    - 都道府県コード又は市区町村コード
+    - 市区町村コード
+  - key: item_id
+    source:
+    - ID
+    - ゴミの分別方法_ID
+    - ごみの分別方法_ID
+    - 'NO'
+  - key: organization_name
+    source:
+    - 地方公共団体名
+    - ゴミの分別方法_地方公共団体名
+    - ごみの分別方法_地方公共団体名
+  - key: collection_area
+    source:
+    - 地区名
+  - key: item_name
+    source:
+    - ゴミの品目
+    - ごみの品目
+    - 品目
+    - ゴミの分別方法_品目
+    - ごみの分別方法_品目
+  - key: item_name_kana
+    source:
+    - ゴミの品目_カナ
+    - ごみの品目_カナ
+    - 品目_カナ
+  - key: item_name_en
+    source:
+    - ゴミの品目_英字
+    - ごみの品目_英字
+    - 品目_英字
+  - key: separation_category
+    source:
+    - 分別区分
+    - ゴミの分別方法_分別区分
+    - ごみの分別方法_分別区分
+  - key: caution
+    source:
+    - 注意点
+    - ゴミの分別方法_注意点
+    - ごみの分別方法_注意点
+  - key: fee_type
+    source:
+    - 料金種別
+    - ゴミの分別方法_料金種別
+    - ごみの分別方法_料金種別
+  - key: fee
+    source:
+    - 料金
+    - ゴミの分別方法_料金
+    - ごみの分別方法_料金
+  - key: bulky_fee
+    source:
+    - 粗大ごみ回収料金
+    - 粗大ごみ料金
+  - key: fee_notes
+    source:
+    - 料金備考
+    - ゴミの分別方法_料金備考
+    - ごみの分別方法_料金備考
+  - key: notes
+    source:
+    - 備考
+    - ゴミの分別方法_備考
+    - ごみの分別方法_備考
+- id: garbage_collection_place
+  title: ゴミ集積所一覧
+  page: https://www.city.hino.lg.jp/opendata/about/1026816/1026918.html
+  url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/918/132128_garbage_collection_place.csv
+  as_of: '2024-03-28'
+  facility_url: https://www.city.hino.lg.jp/_res/projects/default_project/_page_/001/026/918/132128_facility.csv
+  required_columns:
+  - name
+  identity_column: name
+  columns:
+  - key: municipality_code
+    source:
+    - ゴミ集積場所_全国地方公共団体コード
+    - 全国地方公共団体コード
+  - key: facility_id
+    source:
+    - 施設_ID
+  - key: collection_place_id
+    source:
+    - ゴミ集積場所_ID
+  - key: name
+    source:
+    - ゴミ集積場所_名称
+    - 名称
+  - key: name_kana
+    source:
+    - ゴミ集積場所_名称（カナ）
+    - 名称_カナ
+  - key: name_en
+    source:
+    - ゴミ集積場所_名称（英字）
+    - 名称_英字
+  - key: description
+    source:
+    - ゴミ集積場所_説明
+    - 説明
+  - key: lat
+    source:
+    - ゴミ集積場所_緯度
+    - 緯度
+  - key: lon
+    source:
+    - ゴミ集積場所_経度
+    - 経度
+  - key: crs
+    source:
+    - ゴミ集積場所_座標参照系
+    - 座標参照系
+  - key: crs_code
+    source:
+    - ゴミ集積場所_座標参照系コード
+    - 座標参照系コード
+  - key: garbage_type
+    source:
+    - ゴミ集積場所_ゴミ種類
+  - key: district
+    source:
+    - ゴミ集積場所_地区名
+    - 地区名
+  - key: collection_day
+    source:
+    - ゴミ集積場所_ゴミ収集日
+  - key: url
+    source:
+    - ゴミ集積場所_自治体のページURL
+    - URL
+  - key: caution
+    source:
+    - ゴミ集積場所_注意事項
+    - 注意点
