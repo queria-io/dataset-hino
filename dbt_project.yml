@@ -22,5 +22,7 @@ models:
         +materialized: table
       stg:
         +materialized: view
+      # mart は実体化する。view だと ods_geometry の st_point が読むたびに評価され、
+      # spatial 拡張を読み込んでいないブラウザの DuckDB からは統計も SQL も通らない
       mart:
-        +materialized: view
+        +materialized: table
