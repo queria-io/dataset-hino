@@ -17,6 +17,7 @@ sources:
 fields:
 - name: municipality_code
   title: 全国地方公共団体コード
+  semantic: { role: entity, name: city }
 - name: facility_id
   title: 施設ID
   description: 併走する施設情報ファイルとの結合キー
@@ -43,6 +44,7 @@ fields:
   title: 建物名等
 - name: postal_code
   title: 郵便番号
+  semantic: { role: entity, name: postal_code }
 - name: phone_number
   title: 電話番号
 - name: lat

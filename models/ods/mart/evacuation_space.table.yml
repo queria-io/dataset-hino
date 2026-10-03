@@ -17,6 +17,7 @@ fields:
 - name: municipality_code
   title: 全国地方公共団体コード
   description: 6桁の全国地方公共団体コード（元データの表記のまま。5桁の場合もある）
+  semantic: { role: entity, name: city }
 - name: facility_id
   title: ID
   description: 日野市が採番した施設ID。定義書Bの施設情報ファイルとの結合キーでもある。実データでは全行に入っており、テーブル内で一意（2026-09-11 時点の実測）
@@ -33,6 +34,7 @@ fields:
   title: 市区町村
 - name: postal_code
   title: 郵便番号
+  semantic: { role: entity, name: postal_code }
 - name: phone_number
   title: 電話番号
 - name: lat
