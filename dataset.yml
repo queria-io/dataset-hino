@@ -13,6 +13,7 @@ keywords:
   - GIS
 homepage: https://github.com/queria-io/dataset-hino
 language: ja
+themes: [justice_safety_environment, education_culture, government_finance, social_security_health, ict_science, population, transport_tourism]
 
 licenses:
   - CC-BY-4.0

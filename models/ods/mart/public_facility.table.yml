@@ -10,6 +10,7 @@ keywords:
 - 自治体標準オープンデータセット
 - GIS
 published: true
+themes: [government_finance]
 sources:
 - path: https://www.city.hino.lg.jp/opendata/about/1026816/1026807.html
 fields:
