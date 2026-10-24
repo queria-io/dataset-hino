@@ -11,6 +11,7 @@ keywords:
 - 自治体標準オープンデータセット
 - GIS
 published: true
+themes: [justice_safety_environment]
 sources:
 - path: https://www.city.hino.lg.jp/opendata/about/1026816/1026809.html
 fields:
