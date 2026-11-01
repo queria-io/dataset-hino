@@ -45,6 +45,11 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
+  - name: legal_entity_number
 - name: cultural_property
   description: 日野市が公開する「文化財一覧」（自治体標準オープンデータセット）。文化財保護法および市の文化財保護条例に基づき指定・登録された文化財を、分類・種類・所有者・指定日・所在地とともに収録する。無形文化財や個人所有で住所非公開のものを含むため、緯度経度が入らない行がある。データ時点は
     2024-03-28（日野市が公開ページに掲げている値）。
@@ -99,6 +104,11 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
+  - name: legal_entity_number
 - name: evacuation_space
   description: 日野市が公開する「緊急避難場所一覧」（自治体標準オープンデータセット）。災害対策基本法に基づき市長が指定する、切迫した災害の危険から逃れるための緊急避難場所。災害種別ごとの対応可否を BOOLEAN
     で持つ。全国網羅の類似データとして gsi.emergency_evacuation_site（国土地理院）がある。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
@@ -144,6 +154,10 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
 - name: population
   description: 日野市が公開する「地域・年齢別人口」（自治体標準オープンデータセット）。1行 = 地域 × 調査年月日で、総人口・男女別人口に加えて5歳階級×男女の人口（0-4歳〜85歳以上）と世帯数をワイドに持つ。日野市の月次の人口統計は
     Excel で別に公開されており、当テーブルとは収録時点が異なる。データ時点は 2022-04-01（日野市が公開ページに掲げている値）。
@@ -201,6 +215,7 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
 - name: preschool
   description: 日野市が公開する「子育て施設一覧」（自治体標準オープンデータセット）。保育園・幼稚園などの施設種別・収容定員・受入年齢・一時預かり/病児保育の有無を持つ。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
   access: public
@@ -245,6 +260,10 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
 - name: public_wireless_lan
   description: 日野市が公開する「公衆無線LANアクセスポイント一覧」（自治体標準オープンデータセット）。公衆無線LANアクセスポイントの SSID・提供エリア・設置者を持つ。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
   access: public
@@ -280,6 +299,10 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
 - name: aed
   description: 日野市が公開する「AED設置箇所一覧」（自治体標準オープンデータセット）。AED を設置している施設の名称・位置・設置場所・利用可能日時・小児対応設備の有無を持つ。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
   access: public
@@ -318,6 +341,10 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
 - name: care_service
   description: 日野市が公開する「介護サービス事業所一覧」（自治体標準オープンデータセット）。1行=1事業所で、訪問介護・特別養護老人ホーム・通所介護などの介護保険サービス事業所の名称・実施サービス・所在地・定員・運営法人を持つ。全国網羅の類似データとして
     mhlw.kaigo.establishment（介護サービス情報公表システム）がある。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
@@ -365,6 +392,12 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
+  - name: legal_entity_number
+  - name: street_address_id
 - name: event
   description: 日野市が公開する「イベント一覧」（自治体標準オープンデータセット）。祭り・講座・展示などの開催日時・会場・料金・申込方法を収録する。蓄積データではなく、日野市が公開している時点のファイルの内容。会場の施設情報は
     ods.public_facility も併せて参照する。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
@@ -429,6 +462,11 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
+  - name: legal_entity_number
 - name: public_toilet
   description: 日野市が公開する「公衆トイレ一覧」（自治体標準オープンデータセット）。公衆トイレの設置位置・便器数・車椅子使用者用/乳幼児用設備/オストメイト設置の有無・利用可能時間を持つ。和式/洋式/小便器の内訳等の詳細列は
     extras（JSON）に退避する。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
@@ -471,6 +509,10 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
 - name: fire_hydrant
   description: 日野市が公開する「消防水利施設一覧」（自治体標準オープンデータセット）。1行=1水利で、消火栓・防火水槽など消防が消火用水として使える水利の位置と口径を持つ。名称の列は定義上持たず、種別で識別する。データ時点は
     2024-03-28（日野市が公開ページに掲げている値）。
@@ -507,6 +549,11 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
+  - name: street_address_id
 - name: school_district
   description: 日野市が公開する「小中学校通学区域情報」（自治体標準オープンデータセット）。1行=1学校の通学区域で、区域に含まれる住所をセミコロン区切りの文字列で持つ。施設一覧ではないため所在地・緯度経度の列は持たない（学校の位置は
     ods.educational_institution を参照）。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
@@ -533,6 +580,7 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
 - name: emergency_radio
   description: 日野市が公開する「防災行政無線設置一覧」（自治体標準オープンデータセット）。防災行政無線の屋外拡声子局の設置場所を持つ。1行=1設置箇所。本体ファイルは住所と座標を持たず、併走する施設情報ファイル（132128_facility.csv）側にあるため、施設_ID
     で結合して補っている。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
@@ -573,6 +621,10 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
 - name: educational_institution
   description: 日野市が公開する「教育機関一覧」（自治体標準オープンデータセット）。幼稚園・小学校・中学校等の学校種、設置区分、所在地、緯度経度、連絡先を持つ。所在地は連結表記の列を持たず市区町村/町字/番地以下に分かれる。学校種は統制コードと日本語ラベルが混在しうるため生値のまま保持する。データ時点は
     2024-03-28（日野市が公開ページに掲げている値）。
@@ -613,6 +665,8 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: latitude
+  - name: longitude
 - name: bicycle_parking
   description: 日野市が公開する「公営駐輪場一覧」（自治体標準オープンデータセット）。駐輪場ごとの名称・位置・収容台数・屋内外区分を持つ。本体ファイルは住所と座標を持たず、併走する施設情報ファイル（132128_facility.csv）側にあるため、施設_ID
     で結合して補っている。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
@@ -664,6 +718,10 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
 - name: polling_place
   description: 日野市が公開する「投票所一覧」（自治体標準オープンデータセット）。選挙の投票所を投票区名とともに収録する。期日前投票所は投票所区分（polling_place_type）で区別する。本体ファイルは住所と座標を持たず、併走する施設情報ファイル（132128_facility.csv）側にあるため、施設_ID
     で結合して補っている。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
@@ -711,6 +769,11 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
+  - name: street_address_id
 - name: garbage_separation
   description: 日野市が公開する「ゴミの分別方法一覧」（自治体標準オープンデータセット）。1行=1品目で、家庭ごみの品目ごとに分別区分・出し方の注意点・手数料を持つ。施設一覧ではなく品目マスタのため名称・所在地・緯度経度の列は持たず、品目名で実体を識別する。分別区分は統制語彙が無いため生値のまま保持する。データ時点は
     2024-03-28（日野市が公開ページに掲げている値）。
@@ -734,6 +797,7 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
 - name: garbage_collection_place
   description: 日野市が公開する「ゴミ集積所一覧」（自治体標準オープンデータセット）。ゴミ集積所の位置・ゴミ種類・収集日を持つ。本体ファイルは住所と座標を持たず、併走する施設情報ファイル（132128_facility.csv）側にあるため、施設_ID
     で結合して補っている。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
@@ -776,6 +840,10 @@ models:
   - name: as_of
   - name: source_url
   - name: source_page
+  - name: local_government_code
+  - name: full_address
+  - name: latitude
+  - name: longitude
 - name: source_files
   description: 自治体標準ODS取り込みの実行結果（1行=1種別）。
   access: public
