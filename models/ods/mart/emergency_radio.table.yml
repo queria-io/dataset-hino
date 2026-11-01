@@ -17,7 +17,8 @@ sources:
 fields:
 - name: municipality_code
   title: 全国地方公共団体コード
-  semantic: { role: entity, name: city }
+  description: 非推奨。local_government_code を使う
+  semantic: { role: dimension }
 - name: facility_id
   title: 施設ID
   description: 併走する施設情報ファイルとの結合キー
@@ -34,7 +35,8 @@ fields:
   title: 名称英字
 - name: address
   title: 所在地
-  description: 施設情報ファイル側の住所_連結表記
+  description: 非推奨。full_address を使う
+  semantic: { role: dimension }
 - name: prefecture
   title: 都道府県
 - name: city
@@ -52,8 +54,12 @@ fields:
   title: 電話番号
 - name: lat
   title: 緯度
+  description: 非推奨。latitude を使う
+  semantic: { role: dimension }
 - name: lon
   title: 経度
+  description: 非推奨。longitude を使う
+  semantic: { role: dimension }
 - name: geo_lat
   title: 緯度（地図表示用）
   description: Queria が付与。原典の緯度経度が使えればその値、緯度と経度が入れ替わっていれば入れ替えた値。採用できなければ NULL。由来は geo_source を見る
@@ -86,3 +92,13 @@ fields:
 - name: source_page
   title: 公開ページ
   description: 日野市サイト上の、このデータの公開ページ
+- name: local_government_code
+  title: 全国地方公共団体コード
+  semantic: { role: entity, name: city }
+- name: full_address
+  title: 所在地
+  description: 施設情報ファイル側の住所_連結表記
+- name: latitude
+  title: 緯度
+- name: longitude
+  title: 経度

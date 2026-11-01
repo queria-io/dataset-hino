@@ -20,5 +20,6 @@ select
     extras,
     as_of,
     source_url,
-    source_page
+    source_page,
+    municipality_code as local_government_code
 from {{ ref('stg_school_district') }}

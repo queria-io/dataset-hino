@@ -18,8 +18,8 @@ sources:
 fields:
 - name: municipality_code
   title: 全国地方公共団体コード
-  description: 6桁の全国地方公共団体コード（元データの表記のまま。5桁の場合もある）
-  semantic: { role: entity, name: city }
+  description: 非推奨。local_government_code を使う
+  semantic: { role: dimension }
 - name: facility_id
   title: ID
   description: 日野市が採番した施設ID。定義書Bの施設情報ファイルとの結合キーでもある。実データでは全行に入っており、テーブル内で一意（2026-09-11 時点の実測）
@@ -42,7 +42,8 @@ fields:
   description: 文化財が設置されている施設・建物などの名称
 - name: address
   title: 所在地
-  description: 所在地の連結表記（旧形式の「住所」列を含む）
+  description: 非推奨。full_address を使う
+  semantic: { role: dimension }
 - name: prefecture
   title: 都道府県
 - name: city
@@ -56,8 +57,12 @@ fields:
   title: 電話番号
 - name: lat
   title: 緯度
+  description: 非推奨。latitude を使う
+  semantic: { role: dimension }
 - name: lon
   title: 経度
+  description: 非推奨。longitude を使う
+  semantic: { role: dimension }
 - name: geo_lat
   title: 緯度（地図表示用）
   description: Queria が付与。原典の緯度経度が使えればその値、緯度と経度が入れ替わっていれば入れ替えた値。採用できなければ NULL。由来は geo_source を見る
@@ -81,8 +86,8 @@ fields:
   description: 棟・基・幅・軀・双など
 - name: corporate_number
   title: 法人番号
-  description: 所有者・管理者・保護団体等の法人番号（元データの表記のまま）
-  semantic: { role: entity, name: corporate_number }
+  description: 非推奨。legal_entity_number を使う
+  semantic: { role: dimension }
 - name: owner
   title: 所有者等
   description: 所有者・管理者・保護団体等。個人所有は「個人」と記載される
@@ -126,3 +131,18 @@ fields:
 - name: source_page
   title: 公開ページ
   description: 日野市サイト上の、このデータの公開ページ
+- name: local_government_code
+  title: 全国地方公共団体コード
+  description: 6桁の全国地方公共団体コード（元データの表記のまま。5桁の場合もある）
+  semantic: { role: entity, name: city }
+- name: full_address
+  title: 所在地
+  description: 所在地の連結表記（旧形式の「住所」列を含む）
+- name: latitude
+  title: 緯度
+- name: longitude
+  title: 経度
+- name: legal_entity_number
+  title: 法人番号
+  description: 所有者・管理者・保護団体等の法人番号（元データの表記のまま）
+  semantic: { role: entity, name: corporate_number }

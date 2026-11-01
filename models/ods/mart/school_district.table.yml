@@ -16,8 +16,8 @@ sources:
 fields:
 - name: municipality_code
   title: 全国地方公共団体コード
-  description: 情報の管理主体の6桁の全国地方公共団体コード
-  semantic: { role: entity, name: city }
+  description: 非推奨。local_government_code を使う
+  semantic: { role: dimension }
 - name: school_id
   title: 学校ID
   description: 自治体内で一意の学校 ID
@@ -71,3 +71,7 @@ fields:
 - name: source_page
   title: 公開ページ
   description: 日野市サイト上の、このデータの公開ページ
+- name: local_government_code
+  title: 全国地方公共団体コード
+  description: 情報の管理主体の6桁の全国地方公共団体コード
+  semantic: { role: entity, name: city }
