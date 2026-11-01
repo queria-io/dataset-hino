@@ -32,5 +32,10 @@ select
     extras,
     as_of,
     source_url,
-    source_page
+    source_page,
+    municipality_code as local_government_code,
+    address as full_address,
+    lat as latitude,
+    lon as longitude,
+    corporate_number as legal_entity_number
 from {{ ref('stg_public_facility') }}

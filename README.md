@@ -48,7 +48,12 @@
 列名は東京都オープンデータカタログを取り込んだ `metro_tokyo` の `ods` スキーマと
 揃えてあります。同じ列名で近隣自治体と並べて集計できます。
 
-座標は3種類の列で表します。`lat` / `lon` は原典の値をそのまま残し、地図に使える座標を
+全国地方公共団体コード・所在地・緯度経度・法人番号・町字ID は、Queria の語彙の名前の列
+（`local_government_code` / `full_address` / `latitude` / `longitude` / `legal_entity_number` /
+`street_address_id`）で持ちます。同じ値の `municipality_code` / `address` / `lat` / `lon` /
+`corporate_number` / `town_id` は非推奨で、当面は残します。
+
+座標は3種類の列で表します。`latitude` / `longitude` は原典の値をそのまま残し、地図に使える座標を
 `geo_lat` / `geo_lon` に入れ、採用した値の由来を `geo_source` に持ちます。
 日野市の CSV は原典の座標がそのまま使えるため、座標を持つ行の `geo_source` は `source` です。
 住所を非公開にしている文化財のように原典が座標を持たない行では、`geo_lat` / `geo_lon` /

@@ -31,5 +31,7 @@ select
     extras,
     as_of,
     source_url,
-    source_page
+    source_page,
+    lat as latitude,
+    lon as longitude
 from {{ ref('stg_educational_institution') }}
