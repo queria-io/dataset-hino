@@ -1,20 +1,15 @@
-# dataset-hino
+# 日野市
 
-東京都日野市が公開している自治体標準オープンデータセットを、Queria のカタログ
-（[data.queria.io](https://data.queria.io/)）へ取り込むデータセットです。
+東京都日野市が公開する自治体標準オープンデータセット 18 種類を、SQL で検索・集計できるテーブルにしたデータセットです。公共施設・AED・緊急避難場所・介護サービス事業所・子育て施設・文化財・投票所・ゴミの分別方法などを、デジタル庁のデータセット定義書の様式のまま収録しています。
 
-## データ出典
+## 出典と利用条件
 
-[日野市オープンデータ](https://www.city.hino.lg.jp/opendata/)が公開している CSV を、
-デジタル庁のデータセット定義書の様式のまま収録しています。ライセンスは CC BY 4.0 です。
+- [日野市オープンデータ](https://www.city.hino.lg.jp/opendata/)が公開している CSV を加工して作成しています
+- ライセンスは [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) です
 
-日野市のオープンデータカタログは CKAN ではなく自前の CGI（`/cgi-opd/opendata.cgi`）で、
-機械可読な一覧の出口がありません。そのため種別を推定せず、公開ページと CSV の URL を
-`hino_datasets.yml` に直接持っています。URL が変わったらそこを直します。
+## テーブル
 
-## 収録テーブル
-
-`ods` スキーマに18種別 + 取り込み結果の1本。1テーブル=1種別です。
+`ods` スキーマに 18 種類と、取り込みの結果のテーブルがあります。1 テーブルが 1 種類です。
 
 | テーブル | 内容 | 行数 | データ時点 |
 | --- | --- | ---: | --- |
@@ -38,60 +33,38 @@
 | `garbage_collection_place` | ゴミ集積所 | 1 | 2024-03-28 |
 | `source_files` | 取り込みの実行結果 | 18 | — |
 
-行数は 2026-09-11 時点の実測です。`fire_hydrant` と `garbage_collection_place` の
-行数が少ないのは取り込みの欠落ではなく、原典の CSV がその件数で公開されているためです。
-テーブルの中身が少ないときは `source_files` の `status` と `row_count` を見ると、
-原典がそうなのか取り込みで落ちたのかを切り分けられます。
+行数は 2026-09-11 時点です。データ時点は日野市が公開ページに掲げている値で、ファイルの取得日ではありません（各行の `as_of`）。
 
-## 列の揃え方
+## 使い方
 
-列名は東京都オープンデータカタログを取り込んだ `metro_tokyo` の `ods` スキーマと
-揃えてあります。同じ列名で近隣自治体と並べて集計できます。
+日野市と都内の区市町村の AED の数を並べる（`metro_tokyo` の `ods` スキーマと列名を合わせています）:
 
-全国地方公共団体コード・所在地・緯度経度・法人番号・町字ID は、Queria の語彙の名前の列
-（`local_government_code` / `full_address` / `latitude` / `longitude` / `legal_entity_number` /
-`street_address_id`）で持ちます。同じ値の `municipality_code` / `address` / `lat` / `lon` /
-`corporate_number` / `town_id` は非推奨で、当面は残します。
+```sql
+SELECT org, count(*) AS aeds
+FROM (
+  SELECT '日野市' AS org, name FROM hino.ods.aed
+  UNION ALL
+  SELECT org_title, name FROM metro_tokyo.ods.aed
+)
+GROUP BY ALL
+ORDER BY aeds DESC;
+```
 
-座標は3種類の列で表します。`latitude` / `longitude` は原典の値をそのまま残し、地図に使える座標を
-`geo_lat` / `geo_lon` に入れ、採用した値の由来を `geo_source` に持ちます。
-日野市の CSV は原典の座標がそのまま使えるため、座標を持つ行の `geo_source` は `source` です。
-住所を非公開にしている文化財のように原典が座標を持たない行では、`geo_lat` / `geo_lon` /
-`geo_source` / `geometry` がいずれも NULL になります。
+## 列
 
-`as_of` は日野市が公開ページに掲げている「データ時点」で、ファイルの取得日ではありません。
+- 全国地方公共団体コード・所在地・緯度経度・法人番号・町字 ID は、Queria の語彙の名前の列（`local_government_code`・`full_address`・`latitude`・`longitude`・`legal_entity_number`・`street_address_id`）で持ちます。同じ値の `municipality_code`・`address`・`lat`・`lon`・`corporate_number`・`town_id` は非推奨で、当面は残します
+- `latitude`・`longitude` は原典の値のままです。地図に表示するときは、Queria が付与した `geo_lat`・`geo_lon` を使ってください。採用した値の由来は `geo_source` にあります
+- 住所を非公開にしている文化財のように原典が座標を持たない行は、`geo_lat`・`geo_lon`・`geo_source`・`geometry` が NULL です
 
-## 施設・設備分離型の結合
+## 注意
 
-防災行政無線・公営駐輪場・投票所・ゴミ集積所の4種別は、データセット定義書Bの
-施設・設備分離型で公開されていて、本体のファイルが住所と座標を持ちません。
-併走する施設情報ファイル（`132128_facility.csv`）を施設_ID で結合して補っています。
+- 防災行政無線・公営駐輪場・投票所・ゴミ集積所の 4 種類は、本体のファイルが住所と座標を持ちません。施設情報ファイル（`132128_facility.csv`）と施設_ID で結合して、空の列だけを埋めています。結合できた行数は `source_files` の `facility_joined` にあります
+- `fire_hydrant` と `garbage_collection_place` の行数が少ないのは、原典の CSV がその件数で公開されているためです
+- テーブルの行が少ないときは、`source_files` の `status` と `row_count` で、原典の件数なのか取り込みの失敗なのかを確認できます
 
-結合は本体側が空の列だけを埋め、原典が持つ値は上書きしません。結合できた行数は
-`source_files` の `facility_joined` で確認できます。
-
-施設情報ファイルを取得できなかったときと、取得できたのに施設_ID が突合しなかったときは、
-住所と座標を欠いたまま公開することになるため `status` に `degraded` を記録します。
-本体の行自体は取れているので公開は止めません。一方、本体ファイルの取得や様式の判定に
-失敗したときは 0 行で公開してしまわないよう、`tests/source_files_ingested.sql` が
-ビルドを落とします。
-
-## ビルド
+## 更新
 
 ```bash
 uv sync
 bash scripts/build.sh
 ```
-
-`queria sync`（pull → ビルド → push）が走ります。`uv run dbt run` / `uv run dbt build` を
-直接実行すると DuckLake カタログとの不整合が起きるので使いません。
-
-書き込みはすべて Queria が発行する資格情報を要するため、ローカルだけで完結する経路は
-ありません。公開せずに通しで確かめたいときは、queria-cli の `tools/rotate.py` を
-スタンドインに対して回します（手順は `queria-cli/tools/README.md`）。
-
-SQL の検証には `queria sql` を使います。
-
-## ライセンス
-
-収録データは日野市の [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) です。

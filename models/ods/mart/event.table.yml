@@ -1,8 +1,10 @@
 schema: ods
 name: event
 title: イベント
-description: 日野市が公開する「イベント一覧」（自治体標準オープンデータセット）。祭り・講座・展示などの開催日時・会場・料金・申込方法を収録する。蓄積データではなく、日野市が公開している時点のファイルの内容。会場の施設情報は
-  ods.public_facility も併せて参照する。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
+description: |-
+  日野市が公開する「イベント一覧」（自治体標準オープンデータセット）です。祭り・講座・展示などの開催日時・会場・料金・申込方法を持ちます。データ時点は 2024-03-28 です。
+
+  - 日野市が公開している時点のファイルの内容で、過去のイベントは蓄積していません
 keywords:
 - 日野市
 - 東京都
@@ -109,13 +111,13 @@ fields:
   semantic: { role: dimension }
 - name: geo_lat
   title: 緯度（地図表示用）
-  description: Queria が付与。原典の緯度経度が使えればその値、緯度と経度が入れ替わっていれば入れ替えた値。採用できなければ NULL。由来は geo_source を見る
+  description: 地図表示用の緯度（Queria が付与）。由来は geo_source
 - name: geo_lon
   title: 経度（地図表示用）
   description: Queria が付与。geo_lat と対になる経度
 - name: geo_source
   title: 座標の由来
-  description: source=原典の緯度経度をそのまま採用、source_swapped=原典で緯度と経度が入れ替わっていたので入れ替えて採用、NULL=採用できる座標が無い
+  description: source=原典のまま、source_swapped=緯度と経度を入れ替えた値、NULL=座標なし
 - name: geo_level
   title: 座標の粒度
   description: 原典由来のため source 固定
