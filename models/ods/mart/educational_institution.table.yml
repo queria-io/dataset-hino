@@ -1,8 +1,10 @@
 schema: ods
 name: educational_institution
 title: 教育機関
-description: 日野市が公開する「教育機関一覧」（自治体標準オープンデータセット）。幼稚園・小学校・中学校等の学校種、設置区分、所在地、緯度経度、連絡先を持つ。所在地は連結表記の列を持たず市区町村/町字/番地以下に分かれる。学校種は統制コードと日本語ラベルが混在しうるため生値のまま保持する。データ時点は
-  2024-03-28（日野市が公開ページに掲げている値）。
+description: |-
+  日野市が公開する「教育機関一覧」（自治体標準オープンデータセット）です。幼稚園・小学校・中学校などの学校種・設置区分・所在地・位置・連絡先を持ちます。データ時点は 2024-03-28 です。
+
+  - 学校種の表記は原典のままです
 keywords:
 - 日野市
 - 東京都
@@ -64,13 +66,13 @@ fields:
   semantic: { role: dimension }
 - name: geo_lat
   title: 緯度（地図表示用）
-  description: Queria が付与。原典の緯度経度が使えればその値、緯度と経度が入れ替わっていれば入れ替えた値。採用できなければ NULL。由来は geo_source を見る
+  description: 地図表示用の緯度（Queria が付与）。由来は geo_source
 - name: geo_lon
   title: 経度（地図表示用）
   description: Queria が付与。geo_lat と対になる経度
 - name: geo_source
   title: 座標の由来
-  description: source=原典の緯度経度をそのまま採用、source_swapped=原典で緯度と経度が入れ替わっていたので入れ替えて採用、NULL=採用できる座標が無い
+  description: source=原典のまま、source_swapped=緯度と経度を入れ替えた値、NULL=座標なし
 - name: geo_level
   title: 座標の粒度
   description: 原典由来のため source 固定

@@ -1,8 +1,10 @@
 schema: ods
 name: public_facility
 title: 公共施設
-description: 日野市が公開する「公共施設一覧」（自治体標準オープンデータセット）。公民館・図書館・体育館・交流センター等の名称・所在地・連絡先・利用可能時間・アクセス方法を持つ。バリアフリー設備等の標準外の詳細列は
-  extras（JSON）に退避する。データ時点は 2024-03-28（日野市が公開ページに掲げている値）。
+description: |-
+  日野市が公開する「公共施設一覧」（自治体標準オープンデータセット）です。公民館・図書館・体育館などの名称・所在地・連絡先・利用可能時間・アクセス方法を持ちます。データ時点は 2024-03-28 です。
+
+  - バリアフリー設備など標準にない列は extras（JSON）にあります
 keywords:
 - 日野市
 - 東京都
@@ -20,7 +22,7 @@ fields:
   semantic: { role: dimension }
 - name: facility_id
   title: ID
-  description: 日野市が採番した施設ID。定義書Bの施設情報ファイルとの結合キーでもある。実データでは全行に入っており、テーブル内で一意（2026-09-11 時点の実測）
+  description: 日野市が採番した施設 ID。施設情報ファイルとの結合キー
 - name: name
   title: 名称
 - name: name_kana
@@ -52,13 +54,13 @@ fields:
   semantic: { role: dimension }
 - name: geo_lat
   title: 緯度（地図表示用）
-  description: Queria が付与。原典の緯度経度が使えればその値、緯度と経度が入れ替わっていれば入れ替えた値。採用できなければ NULL。由来は geo_source を見る
+  description: 地図表示用の緯度（Queria が付与）。由来は geo_source
 - name: geo_lon
   title: 経度（地図表示用）
   description: Queria が付与。geo_lat と対になる経度
 - name: geo_source
   title: 座標の由来
-  description: source=原典の緯度経度をそのまま採用、source_swapped=原典で緯度と経度が入れ替わっていたので入れ替えて採用、NULL=採用できる座標が無い
+  description: source=原典のまま、source_swapped=緯度と経度を入れ替えた値、NULL=座標なし
 - name: geo_level
   title: 座標の粒度
   description: 原典由来のため source 固定
