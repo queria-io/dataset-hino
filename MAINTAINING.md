@@ -21,8 +21,7 @@ uv sync
 bash scripts/build.sh
 ```
 
-`queria sync`（pull → ビルド → push）が走ります。`uv run dbt run` / `uv run dbt build` を
-直接実行すると DuckLake カタログとの不整合が起きるので使いません。
+`scripts/build.sh` は公開中のバージョンを `fdl checkout` してから取り込み・ビルドし、`fdl commit` と `fdl push` で公開します（`shared/scripts/build-fdl.sh`）。手元では `FDL_TOKEN` に Queria の API トークンを入れます。GitHub Actions では Queria のトークンを OIDC で取得します。`uv run dbt run` / `uv run dbt build` を直接実行すると作業カタログが作られないので使いません。
 
 書き込みはすべて Queria が発行する資格情報を要するため、ローカルだけで完結する経路は
 ありません。公開せずに通しで確かめたいときは、queria-cli の `tools/rotate.py` を

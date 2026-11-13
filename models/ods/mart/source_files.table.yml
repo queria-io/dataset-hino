@@ -10,8 +10,7 @@ keywords:
 - 東京都
 - 自治体標準オープンデータセット
 - ODS
-published: true
-themes: [other]
+annotations: { queria: { themes: [other] } }
 sources:
 - path: https://www.city.hino.lg.jp/opendata/
 fields:
