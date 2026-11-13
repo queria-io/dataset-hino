@@ -12,15 +12,14 @@ keywords:
 - バリアフリー
 - 自治体標準オープンデータセット
 - GIS
-published: true
-themes: [government_finance]
+annotations: { queria: { themes: [government_finance] } }
 sources:
 - path: https://www.city.hino.lg.jp/opendata/about/1026816/1026908.html
 fields:
 - name: municipality_code
   title: 全国地方公共団体コード
   description: 非推奨。local_government_code を使う
-  semantic: { role: dimension }
+  annotations: { queria: { semantic: { role: dimension } } }
 - name: facility_id
   title: ID
 - name: name
@@ -31,7 +30,7 @@ fields:
 - name: address
   title: 所在地
   description: 非推奨。full_address を使う
-  semantic: { role: dimension }
+  annotations: { queria: { semantic: { role: dimension } } }
 - name: prefecture
   title: 都道府県
 - name: city
@@ -42,11 +41,11 @@ fields:
 - name: lat
   title: 緯度
   description: 非推奨。latitude を使う
-  semantic: { role: dimension }
+  annotations: { queria: { semantic: { role: dimension } } }
 - name: lon
   title: 経度
   description: 非推奨。longitude を使う
-  semantic: { role: dimension }
+  annotations: { queria: { semantic: { role: dimension } } }
 - name: geo_lat
   title: 緯度（地図表示用）
   description: 地図表示用の緯度（Queria が付与）。由来は geo_source
@@ -107,7 +106,7 @@ fields:
   description: 日野市サイト上の、このデータの公開ページ
 - name: local_government_code
   title: 全国地方公共団体コード
-  semantic: { role: entity, name: city }
+  annotations: { queria: { semantic: { role: entity, name: city } } }
 - name: full_address
   title: 所在地
 - name: latitude

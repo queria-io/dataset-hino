@@ -11,15 +11,14 @@ keywords:
 - 公共施設
 - 自治体標準オープンデータセット
 - GIS
-published: true
-themes: [government_finance]
+annotations: { queria: { themes: [government_finance] } }
 sources:
 - path: https://www.city.hino.lg.jp/opendata/about/1026816/1026807.html
 fields:
 - name: municipality_code
   title: 全国地方公共団体コード
   description: 非推奨。local_government_code を使う
-  semantic: { role: dimension }
+  annotations: { queria: { semantic: { role: dimension } } }
 - name: facility_id
   title: ID
   description: 日野市が採番した施設 ID。施設情報ファイルとの結合キー
@@ -34,24 +33,24 @@ fields:
 - name: address
   title: 所在地
   description: 非推奨。full_address を使う
-  semantic: { role: dimension }
+  annotations: { queria: { semantic: { role: dimension } } }
 - name: prefecture
   title: 都道府県
 - name: city
   title: 市区町村
 - name: postal_code
   title: 郵便番号
-  semantic: { role: entity, name: postal_code }
+  annotations: { queria: { semantic: { role: entity, name: postal_code } } }
 - name: phone_number
   title: 電話番号
 - name: lat
   title: 緯度
   description: 非推奨。latitude を使う
-  semantic: { role: dimension }
+  annotations: { queria: { semantic: { role: dimension } } }
 - name: lon
   title: 経度
   description: 非推奨。longitude を使う
-  semantic: { role: dimension }
+  annotations: { queria: { semantic: { role: dimension } } }
 - name: geo_lat
   title: 緯度（地図表示用）
   description: 地図表示用の緯度（Queria が付与）。由来は geo_source
@@ -70,7 +69,7 @@ fields:
 - name: corporate_number
   title: 法人番号
   description: 非推奨。legal_entity_number を使う
-  semantic: { role: dimension }
+  annotations: { queria: { semantic: { role: dimension } } }
 - name: corporate_name
   title: 団体名
   description: 運営主体（指定管理者等）の名称
@@ -106,7 +105,7 @@ fields:
 - name: local_government_code
   title: 全国地方公共団体コード
   description: 6桁の全国地方公共団体コード（元データの表記のまま。5桁の場合もある）
-  semantic: { role: entity, name: city }
+  annotations: { queria: { semantic: { role: entity, name: city } } }
 - name: full_address
   title: 所在地
   description: 所在地の連結表記（旧形式の「住所」列を含む）
@@ -116,4 +115,4 @@ fields:
   title: 経度
 - name: legal_entity_number
   title: 法人番号
-  semantic: { role: entity, name: corporate_number }
+  annotations: { queria: { semantic: { role: entity, name: corporate_number } } }

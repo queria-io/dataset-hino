@@ -1,4 +1,6 @@
-spec_version: "0.1"
+# この dataset.yml は fdl commit が読む（FDL の dataset.json を YAML で書いたもの）。
+# 表の説明は models/ の *.table.yml に書く。表と列の型・NULL・行数は fdl commit がカタログから埋める。
+# Queria だけの項目（テーマ・カバー・AI 向けの説明・列の意味）は annotations.queria に書く。
 name: hino
 title: 日野市オープンデータ
 description: |-
@@ -16,7 +18,6 @@ keywords:
   - GIS
 homepage: https://github.com/queria-io/dataset-hino
 language: ja
-themes: [justice_safety_environment, education_culture, government_finance, social_security_health, ict_science, population, transport_tourism]
 
 licenses:
   - CC-BY-4.0
@@ -33,8 +34,11 @@ contributors:
 temporal_coverage: { start: "2022-04-01", end: "2024-03-28" }
 spatial_coverage: [JP]
 update_frequency: irregular
-cover: 🏞️
 
 schemas:
   - name: ods
     title: 自治体標準オープンデータセット
+annotations:
+  queria:
+    themes: [justice_safety_environment, education_culture, government_finance, social_security_health, ict_science, population, transport_tourism]
+    cover: 🏞️
