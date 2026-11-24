@@ -11,4 +11,4 @@ select
     url,
     page,
     fetched_at
-from {{ ref('raw_source_files') }}
+from {{ ref('stg_source_files') }}
