@@ -1,0 +1,92 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+title: 公衆無線LAN
+description: 日野市が公開する「公衆無線LANアクセスポイント一覧」（自治体標準オープンデータセット）です。SSID・提供エリア・設置者を持ちます。データ時点は 2024-03-28 です。
+topics:
+  - 日野市
+  - 東京都
+  - Wi-Fi
+  - 公衆無線LAN
+  - 自治体標準オープンデータセット
+  - GIS
+sources:
+  - '1026904'
+columns:
+  - name: municipality_code
+    title: 全国地方公共団体コード
+    description: 非推奨。local_government_code を使う
+    dimension: categorical
+  - name: facility_id
+    title: ID
+    description: 日野市が採番した施設 ID。施設情報ファイルとの結合キー
+  - name: name
+    title: 名称
+    description: アクセスポイント（設置施設）の名称
+  - name: name_kana
+    title: 名称カナ
+  - name: address
+    title: 所在地
+    description: 非推奨。full_address を使う
+    dimension: categorical
+  - name: prefecture
+    title: 都道府県
+  - name: city
+    title: 市区町村
+  - name: postal_code
+    title: 郵便番号
+    entity: postal_code
+  - name: phone_number
+    title: 電話番号
+  - name: lat
+    title: 緯度
+    description: 非推奨。latitude を使う
+    dimension: categorical
+  - name: lon
+    title: 経度
+    description: 非推奨。longitude を使う
+    dimension: categorical
+  - name: geo_lat
+    title: 緯度（地図表示用）
+    description: 地図表示用の緯度（Queria が付与）。由来は geo_source
+  - name: geo_lon
+    title: 経度（地図表示用）
+    description: Queria が付与。geo_lat と対になる経度
+  - name: geo_source
+    title: 座標の由来
+    description: source=原典のまま、source_swapped=緯度と経度を入れ替えた値、NULL=座標なし
+  - name: geo_level
+    title: 座標の粒度
+    description: 原典由来のため source 固定
+  - name: geometry
+    title: ジオメトリ
+    description: Queria が付与。geo_lat / geo_lon から作った POINT。座標が無い行は NULL
+  - name: installer
+    title: 設置者
+  - name: ssid
+    title: SSID
+    description: 複数値は ; 区切り
+  - name: coverage_area
+    title: 提供エリア
+  - name: url
+    title: URL
+  - name: notes
+    title: 備考
+  - name: extras
+    title: 追加列
+    description: 標準列にマッピングできなかった元データの列（JSON）
+  - name: as_of
+    title: データ時点
+    description: 日野市が公開ページに掲げている値。取得日ではない
+  - name: source_url
+    title: 取得元URL
+  - name: source_page
+    title: 公開ページ
+    description: 日野市サイト上の、このデータの公開ページ
+  - name: local_government_code
+    title: 全国地方公共団体コード
+    entity: city
+  - name: full_address
+    title: 所在地
+  - name: latitude
+    title: 緯度
+  - name: longitude
+    title: 経度
