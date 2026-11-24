@@ -1,0 +1,75 @@
+$schema: https://tabledoc.queria.io/schemas/dataset/v1.json
+name: hino
+title: 日野市オープンデータ
+description: |-
+  東京都日野市が公開する自治体標準オープンデータセット 18 種類（公共施設・AED・緊急避難場所・介護サービス事業所・子育て施設・文化財・投票所・ゴミの分別方法など）です。列名は metro_tokyo の ods スキーマと同じなので、都内の自治体と並べて集計できます。
+
+  出典：日野市オープンデータ（CC BY 4.0）を加工して作成。
+image: cover.png
+topics:
+  - オープンデータ
+  - 日野市
+  - 東京都
+  - 多摩地域
+  - 自治体標準オープンデータセット
+  - 公共施設
+  - 防災
+  - GIS
+language: ja
+licenses:
+  - CC-BY-4.0
+sources:
+  - id: opendata
+    title: 日野市オープンデータ
+    url: https://www.city.hino.lg.jp/opendata/
+  - id: '1026905'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026905.html
+  - id: '1026914'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026914.html
+  - id: '1026906'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026906.html
+  - id: '1026808'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026808.html
+  - id: '1026913'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026913.html
+  - id: '1026912'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026912.html
+  - id: '1026809'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026809.html
+  - id: '1026907'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026907.html
+  - id: '1026910'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026910.html
+  - id: '1026918'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026918.html
+  - id: '1026917'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026917.html
+  - id: '1026916'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026916.html
+  - id: '1026902'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026902.html
+  - id: '1026903'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026903.html
+  - id: '1026807'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026807.html
+  - id: '1026908'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026908.html
+  - id: '1026904'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026904.html
+  - id: '1026911'
+    url: https://www.city.hino.lg.jp/opendata/about/1026816/1026911.html
+contributors:
+  - id: city
+    title: 日野市
+    url: https://www.city.hino.lg.jp/
+    roles:
+      - rightsHolder
+temporal_coverage:
+  start: '2022-04-01'
+  end: '2024-03-28'
+spatial_coverage:
+  - JP
+update_frequency: irregular
+schemas:
+  - name: ods
+    title: 自治体標準オープンデータセット

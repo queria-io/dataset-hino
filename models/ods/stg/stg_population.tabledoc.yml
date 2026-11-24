@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: 地域・年齢別人口のステージング。型変換のみで、地図表示用の座標は持たない。
+hidden: true

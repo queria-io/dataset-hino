@@ -1,0 +1,3 @@
+$schema: https://tabledoc.queria.io/schemas/table/v1.json
+description: ゴミ集積所のステージング。緯度経度を数値化し、地図表示用の座標を決める。住所と座標は併走する施設情報ファイル由来。
+hidden: true
